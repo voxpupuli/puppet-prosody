@@ -8,4 +8,14 @@
 #
 # Learn more about module testing here: http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include prosody
+
+node default {
+  group {
+    'puppet' :
+      ensure => present;
+  }
+
+  class {
+    'prosody' : ;
+  }
+}
