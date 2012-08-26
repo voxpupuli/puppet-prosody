@@ -1,16 +1,10 @@
-prosody
-
-This is the prosody module.
-
-License
--------
+# Prosody on Puppet
 
 
-Contact
--------
+This Puppet module is for the [Prosody](http://prosody.im/) Jabber/XMPP server.
 
+Currently it is still in development.
 
-Support
--------
+### Support
 
-Please log tickets and issues at our [Projects site](http://projects.example.com)
+Please file bugs and enhancement requests in the [GitHub issue tracker](https://github.com/rtyler/puppet-prosody/issues)
