@@ -1,9 +1,12 @@
 source :gemcutter
 
 gem 'rake'
-gem 'cucumber'
-gem 'rspec-puppet'
-gem 'puppet'
-gem 'rspec'
-gem 'puppetlabs_spec_helper'
 gem 'blimpy', '~> 0.6.0'
+
+group :test do
+  gem 'cucumber'
+  gem 'rspec', '~> 2.11.0'
+  gem 'rspec-puppet'
+  gem 'puppet'
+  gem 'puppetlabs_spec_helper'
+end
