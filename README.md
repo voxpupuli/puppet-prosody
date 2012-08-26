@@ -1,5 +1,4 @@
-# Prosody on Puppet
-
+![Prosody](http://prosody.im/prosody.png)
 
 This Puppet module is for the [Prosody](http://prosody.im/) Jabber/XMPP server.
 
