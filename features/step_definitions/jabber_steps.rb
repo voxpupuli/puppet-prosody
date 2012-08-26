@@ -2,6 +2,8 @@ Given /^I have an empty Linux machine$/ do
   @fleet = Blimpy.fleet do |fleet|
     fleet.add(:aws) do |ship|
       ship.name = "prosody-cucumber"
+      # Use m1.small instead of a tiny
+      ship.flavor = 'm1.small'
       # Ubuntu 12.04 LTS in us-west-2
       ship.image_id = 'ami-4038b470'
       ship.region = 'us-west-2'
