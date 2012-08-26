@@ -7,11 +7,13 @@ Feature: Offer up Jabber as a service
     Given I have an empty Linux machine
     And the machine should become a Jabber server
 
+  @wip
   Scenario: Basic set up
     When I provision the host
     Then the Jabber server should be running
     And it should be listening for connections
 
+  @wip
   Scenario: Open up to the outside world
     Given then firewall has been configured to allow Jabber through
     When I provision the host
