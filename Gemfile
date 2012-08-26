@@ -1,6 +1,7 @@
 source :gemcutter
 
 gem 'rake'
+gem 'cucumber'
 gem 'rspec-puppet'
 gem 'puppet'
 gem 'rspec'
