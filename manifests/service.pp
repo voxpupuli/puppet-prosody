@@ -1,6 +1,7 @@
 class prosody::service {
   service {
     'prosody' :
-      ensure => running;
+      ensure  => running,
+      require => Class[prosody::package];
   }
 }
