@@ -7,7 +7,6 @@ Feature: Offer up Jabber as a service
     Given I have an empty Linux machine
     And the machine should become a Jabber server
 
-  @wip
   Scenario: Basic set up
     When I provision the host
     Then the Jabber server should be running
