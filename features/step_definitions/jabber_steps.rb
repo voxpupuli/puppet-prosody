@@ -43,3 +43,17 @@ Then /^the Jabber port should be open to the outside world$/ do
   pending # express the regexp above with the code you wish you had
 end
 
+Given /^I have configured a virtualhost for "(.*?)"$/ do |vhostname|
+  resources << """
+  prosody::virtualhost {
+    \"#{vhostname}\" :
+      ensure => present;
+  }
+"""
+end
+
+Then /^the "(.*?)" configuration should be enabled$/ do |vhostname|
+  exists = box.ssh_into("ls /etc/prosody/conf.d | grep #{vhostname}")
+  expect(exists).to be(true)
+end
+
