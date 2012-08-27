@@ -4,7 +4,7 @@ describe 'prosody::package' do
   context 'on Ubuntu' do
     let(:facts) do
       {
-        'operatingsystem' => 'Ubuntu'
+        :operatingsystem => 'Ubuntu'
       }
     end
 
