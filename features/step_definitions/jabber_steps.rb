@@ -1,18 +1,5 @@
 Given /^I have an empty Linux machine$/ do
-  @fleet = Blimpy.fleet do |fleet|
-    fleet.add(:aws) do |ship|
-      ship.name = "prosody-cucumber"
-      # Use m1.small instead of a tiny
-      ship.flavor = 'm1.small'
-      # Ubuntu 12.04 LTS in us-west-2
-      ship.image_id = 'ami-4038b470'
-      ship.region = 'us-west-2'
-      ship.livery = Blimpy::Livery::Puppet
-    end
-  end
-
-  # Make sure we set up our object properly
-  expect(@fleet).to_not be_nil
+  expect(vm).to_not be_nil
 end
 
 Given /^the machine should become a Jabber server$/ do
@@ -30,7 +17,7 @@ When /^I provision the host$/ do
     f.write("}\n")
   end
 
-  @fleet.start
+  start_vms
 end
 
 Then /^the Jabber server should be running$/ do

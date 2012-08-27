@@ -6,6 +6,35 @@ require 'blimpy'
 
 module Prosody
   module World
+    def start_vms
+      # Make sure we set up our vms at some point properly
+      expect(vm).to_not be_nil
+      @fleet.start
+    end
+
+    def destroy_vms
+      @fleet.destroy unless @fleet.nil?
+    end
+
+    def vm
+      unless @fleet.nil?
+        return @fleet.ships.first
+      end
+
+      @fleet = Blimpy.fleet do |fleet|
+        fleet.add(:aws) do |ship|
+          ship.name = "prosody-cucumber"
+          # Use m1.small instead of a tiny
+          ship.flavor = 'm1.small'
+          # Ubuntu 12.04 LTS in us-west-2
+          ship.image_id = 'ami-4038b470'
+          ship.region = 'us-west-2'
+          ship.livery = Blimpy::Livery::Puppet
+        end
+      end
+      @fleet.ships.first
+    end
+
     def resources
       # Resources should be an Array of strings that will be joined together to
       # make the full Puppet node manifest that will be provisioned on the host
@@ -53,9 +82,7 @@ Before do
 end
 
 After do
-  unless @fleet.nil?
-    @fleet.destroy
-  end
+  destroy_vms
 
   Dir.chdir(@original_dir)
   # Nuke the temporary working directory after we're all finished
