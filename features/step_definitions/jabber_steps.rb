@@ -21,11 +21,18 @@ When /^I provision the host$/ do
 end
 
 Then /^the Jabber server should be running$/ do
-  pending # express the regexp above with the code you wish you had
+  # Using the `pgrep -f` option because prosody looks like:
+  #   "lua /usr/bin/prosody"
+  # in the process listing
+  running = vm.ssh_into('pgrep -f prosody')
+  expect(running).to be(true)
 end
 
 Then /^it should be listening for connections$/ do
-  pending # express the regexp above with the code you wish you had
+  listening = vm.ssh_into('nc -z localhost 5269')
+  expect(listening).to be(true)
+  listening = vm.ssh_into('nc -z localhost 5222')
+  expect(listening).to be(true)
 end
 
 Given /^then firewall has been configured to allow Jabber through$/ do
