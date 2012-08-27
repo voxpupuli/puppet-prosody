@@ -53,7 +53,7 @@ Given /^I have configured a virtualhost for "(.*?)"$/ do |vhostname|
 end
 
 Then /^the "(.*?)" configuration should be enabled$/ do |vhostname|
-  exists = box.ssh_into("ls /etc/prosody/conf.d | grep #{vhostname}")
+  exists = vm.ssh_into("ls /etc/prosody/conf.d | grep #{vhostname}")
   expect(exists).to be(true)
 end
 
