@@ -28,7 +28,17 @@ describe 'prosody::virtualhost' do
     it {
       should contain_file("#{title}.cfg.lua").with(
         :ensure  => 'present',
+        :path    => "/etc/prosody/conf.avail/#{title}.cfg.lua",
         :content => render_template
+      )
+    }
+
+    it {
+      should contain_file("/etc/prosody/conf.d/#{title}.cfg.lua").with(
+        :ensure  => 'link',
+        :target  => "/etc/prosody/conf.avail/#{title}.cfg.lua",
+        :require => "File[#{title}.cfg.lua]",
+        :notify  => 'Service[prosody]'
       )
     }
   end
@@ -66,7 +76,7 @@ describe 'prosody::virtualhost' do
       should contain_file("#{title}.cfg.lua").with(
         :ensure  => 'present',
         :content => render_template,
-        :require => ["File[#{ssl_key}]", "File[#{ssl_cert}]"]
+        :require => ["File[#{ssl_key}]", "File[#{ssl_cert}]", 'Class[Prosody::Package]']
       )
     }
   end
@@ -79,6 +89,10 @@ describe 'prosody::virtualhost' do
         :ensure  => 'present',
         :content => render_template
       )
+    }
+
+    it {
+      should contain_file("/etc/prosody/conf.d/#{title}.cfg.lua").with_ensure('absent')
     }
   end
 end
