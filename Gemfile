@@ -1,7 +1,7 @@
 source :gemcutter
 
 gem 'rake'
-gem 'blimpy', '~> 0.6.0'
+gem 'blimpy', '~> 0.6.1'
 
 group :test do
   gem 'cucumber'
