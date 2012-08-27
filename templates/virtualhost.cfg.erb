@@ -1,26 +1,22 @@
--- Section for example.com
-
 VirtualHost "<%= @name %>"
-<%
-  if @ensure == 'present'
-%>
+
+<% if @ensure == 'present' %>
     enabled = true
-<%
-  else
-%>
-%>
+<% else %>
     enabled = false
-<%
-  end
-%>
-        -- Assign this host a certificate for TLS, otherwise it would use the one
-        -- set in the global section (if any).
-        -- Note that old-style SSL on port 5223 only supports one certificate, and will always
-        -- use the global one.
-        ssl = {
-                key = "/etc/prosody/certs/example.com.key";
-                certificate = "/etc/prosody/certs/example.com.crt";
-                }
+<% end %>
+
+
+<% if (@ssl_key != 'UNSET') && (@ssl_cert != 'UNSET') %>
+  -- Assign this host a certificate for TLS, otherwise it would use the one
+  -- set in the global section (if any).
+  -- Note that old-style SSL on port 5223 only supports one certificate, and will always
+  -- use the global one.
+  ssl = {
+          key = "<%= @ssl_key %>";
+          certificate = "<%= @ssl_cert %>";
+          }
+<% end %>
 
 ------ Components ------
 -- You can specify components to add hosts that provide special services,
