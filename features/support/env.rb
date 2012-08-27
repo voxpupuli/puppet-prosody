@@ -59,8 +59,9 @@ module Prosody
       expect(@original_dir).to_not be_nil
 
       FileUtils.mkdir_p(manifest_path)
-      FileUtils.mkdir_p(File.join(modules_path, 'modules', 'prosody'))
-      FileUtils.ln_s(File.join(@original_dir, 'manifests'), File.join(modules_path, 'prosody', 'manifests'))
+      prosody_module = File.join(modules_path, 'prosody')
+      FileUtils.mkdir_p(prosody_module)
+      FileUtils.ln_s(File.join(@original_dir, 'manifests'), File.join(prosody_module, 'manifests'))
     end
   end
 end
