@@ -61,7 +61,15 @@ module Prosody
       FileUtils.mkdir_p(manifest_path)
       prosody_module = File.join(modules_path, 'prosody')
       FileUtils.mkdir_p(prosody_module)
-      FileUtils.ln_s(File.join(@original_dir, 'manifests'), File.join(prosody_module, 'manifests'))
+
+      # Make sure all of these directories are made available in the test
+      # directory
+      ['manifests', 'templates', 'lib'].each do |linkable|
+        original = File.join(@original_dir, linkable)
+        next unless File.exists?(original)
+
+        FileUtils.ln_s(original, File.join(prosody_module, linkable))
+      end
     end
   end
 end
