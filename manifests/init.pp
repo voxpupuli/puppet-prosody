@@ -11,10 +11,19 @@ class prosody (
   $s2s_secure_domains = [],
   $authentication = 'internal_plain',
   $components = {},
+  $community_modules = [],
 ) {
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
   class { 'prosody::config': }  ->
   class { 'prosody::service': } ->
   anchor { 'prosody::end': }
+
+  if ($community_modules != [] and $community_modules != undef) {
+    class { 'prosody::community_modules':
+      modules => $community_modules,
+      require => Class['prosody::package'],
+      before  => Class['prosody::service'],
+    }
+  }
 }
