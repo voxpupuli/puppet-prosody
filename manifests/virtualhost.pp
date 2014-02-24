@@ -23,7 +23,8 @@ define prosody::virtualhost($ensure='present', $ssl_key='UNSET', $ssl_cert='UNSE
       ensure  => present,
       require => $config_requires,
       path    => "/etc/prosody/conf.avail/${name}.cfg.lua",
-      content => template('prosody/virtualhost.cfg.erb');
+      content => template('prosody/virtualhost.cfg.erb'),
+      notify  => Service[prosody];
 
     "/etc/prosody/conf.d/${name}.cfg.lua" :
       ensure      => $ensure ? {
