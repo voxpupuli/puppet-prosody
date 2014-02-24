@@ -106,7 +106,7 @@ s2s_secure_domains = {
 ------ Custom config options ------
 
 <% scope.lookupvar('prosody::custom_options').sort.each do |option, value| -%>
-<%= option %> = "<%= value %>"
+<%= option %> = <%= value %>
 <% end -%>
 
 -- Required for init scripts and prosodyctl
