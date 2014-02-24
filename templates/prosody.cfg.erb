@@ -132,6 +132,12 @@ s2s_secure_domains = {
 <% end -%>
 }
 
+------ Custom config options ------
+
+<% scope.lookupvar('prosody::custom_options').each do |option, value| -%>
+<%= option %> = "<%= value %>"
+<% end -%>
+
 -- Required for init scripts and prosodyctl
 pidfile = "/var/run/prosody/prosody.pid"
 
@@ -185,6 +191,7 @@ Component "<%= c %>" <% if component.include?('type') then %>"<%= component['typ
   component_secret = "<%= component['secret'] %>"
 <% end -%>
 <% end -%>
+
 
 ------ Additional config files ------
 -- For organizational purposes you may prefer to add VirtualHost and

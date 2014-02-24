@@ -12,6 +12,7 @@ class prosody (
   $authentication = 'internal_plain',
   $components = {},
   $community_modules = [],
+  $custom_options = {},
 ) {
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
