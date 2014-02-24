@@ -105,7 +105,7 @@ s2s_secure_domains = {
 
 ------ Custom config options ------
 
-<% scope.lookupvar('prosody::custom_options').each do |option, value| -%>
+<% scope.lookupvar('prosody::custom_options').sort.each do |option, value| -%>
 <%= option %> = "<%= value %>"
 <% end -%>
 
@@ -152,13 +152,9 @@ VirtualHost "localhost"
 -- like multi-user conferences, and transports.
 -- For more information on components, see http://prosody.im/doc/components
 
-<%
-components = scope.lookupvar('prosody::components')
-components.keys.each do |c| 
-  component = components[c]
-%>
-Component "<%= c %>" <% if component.include?('type') then %>"<%= component['type'] %>"<% end %>
-<% if component.include?('secret') -%>
+<% scope.lookupvar('prosody::components').sort.each do |name, component| %>
+Component "<%= name %>" <% if component.include?('type') then %>"<%= component['type'] %>"<% end %>
+  <%- if component.include?('secret') -%>
   component_secret = "<%= component['secret'] %>"
   <%- end -%>
   <%- if component.include?('options') -%>
