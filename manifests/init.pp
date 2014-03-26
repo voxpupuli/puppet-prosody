@@ -1,5 +1,6 @@
 class prosody (
   $admins = [],
+  $interfaces = ['0.0.0.0', '::'],
   $allow_registration = false,
   $ssl_protocol = 'tlsv1',
   $ssl_options = ['no_ticket', 'no_compression', 'cipher_server_preference'],

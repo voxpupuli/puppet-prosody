@@ -25,6 +25,13 @@ admins = {
 <% end -%>
 }
 
+-- Which interfaces (addresses) to listen on
+interfaces = {
+<% scope.lookupvar('prosody::interfaces').each do |interface| -%>
+    "<%= interface %>",
+<% end -%>
+}
+
 -- Enable use of libevent for better performance under high load
 -- For more information see: http://prosody.im/doc/libevent
 use_libevent = true;
