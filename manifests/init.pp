@@ -8,6 +8,7 @@ class prosody (
   $ssl_dhparam = undef,
   $ssl_curve = 'secp521r1',
   $c2s_require_encryption = true,
+  $s2s_require_encryption = true,
   $s2s_secure_auth = true,
   $s2s_insecure_domains = [],
   $s2s_secure_domains = [],

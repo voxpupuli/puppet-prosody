@@ -87,6 +87,11 @@ ssl = {
 
 c2s_require_encryption = <%= scope.lookupvar('prosody::c2s_require_encryption') %>
 
+-- Force servers to use encrypted connections?
+
+s2s_require_encryption = <%= scope.lookupvar('prosody::s2s_require_encryption') %>
+
+
 -- Force certificate authentication for server-to-server connections?
 -- This provides ideal security, but requires servers you communicate
 -- with to support encryption AND present valid, trusted certificates.
