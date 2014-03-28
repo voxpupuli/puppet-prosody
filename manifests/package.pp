@@ -10,14 +10,5 @@ class prosody::package {
 
   package { 'prosody' :
     ensure  => present,
-    # Package[openssl] will be required to generate certificates and such
-    require => Package[openssl];
-  }
-
-  if (!defined(Package[openssl])) {
-    package {
-      'openssl' :
-        ensure => present;
-    }
   }
 }
