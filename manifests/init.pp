@@ -20,6 +20,8 @@ class prosody (
   $modules = [],
   $community_modules = [],
   $custom_options = {},
+  $virtualhosts = {},
+  $virtualhost_defaults = {},
 ) {
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
@@ -34,4 +36,7 @@ class prosody (
       before  => Class['prosody::service'],
     }
   }
+
+  # create virtualhost resources via hiera
+  create_resources('prosody::virtualhost', $virtualhosts, $virtualhost_defaults)
 }
