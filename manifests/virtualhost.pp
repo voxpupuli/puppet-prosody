@@ -1,5 +1,3 @@
-
-
 define prosody::virtualhost($ensure='present', $ssl_key='UNSET', $ssl_cert='UNSET') {
   include prosody
 
