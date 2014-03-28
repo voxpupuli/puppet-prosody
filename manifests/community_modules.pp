@@ -3,8 +3,7 @@ class prosody::community_modules (
   $modules = [],
 ) {
 
-  ensure_resource('package', 'mercurial')
-
+  ensure_packages(['mercurial'])
   vcsrepo { $path:
     ensure   => present,
     provider => hg,
