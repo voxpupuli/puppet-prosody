@@ -3,6 +3,7 @@ class prosody::service {
     'prosody' :
       ensure    => running,
       hasstatus => false,
+      restart   => '/usr/bin/prosodyctl reload',
       require   => Class[prosody::package],
   }
 }
