@@ -1,7 +1,5 @@
-.blimpy.d
 .rvmrc
 Gemfile.lock
-features/reports
-features/report.html
 tmp
 .rvmrc
+pkg
