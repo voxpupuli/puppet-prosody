@@ -1,13 +1,16 @@
 ![Prosody](http://prosody.im/prosody.png)
 
-This Puppet module is for the [Prosody](http://prosody.im/) Jabber/XMPP server.
+Puppet module for the [Prosody](http://prosody.im/) Jabber/XMPP server.
 
-Currently it is still in development.
+This module is a fork of rtyler/puppet-prosody because the upstream is dead. A
+bunch of features were added and bugs were fixed.
 
+If you want to use Prosody in a production environment, this is the Puppet
+module to use.
 
 ## Using
 
-**Note:** This module only supports Ubuntu currently
+**Note:** This module currently only supports Ubuntu.
 
 ```puppet
 node default {
@@ -20,6 +23,6 @@ node default {
 }
 ```
 
-### Support
+## Support
 
 Please file bugs and enhancement requests in the [GitHub issue tracker](https://github.com/rtyler/puppet-prosody/issues)
