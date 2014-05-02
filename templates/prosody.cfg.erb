@@ -65,6 +65,11 @@ modules_disabled = {
 -- For more information see http://prosody.im/doc/creating_accounts
 allow_registration = <%= scope.lookupvar('prosody::allow_registration') %>;
 
+-- Debian:
+--   send the server to background.
+--
+daemonize = true;
+
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
