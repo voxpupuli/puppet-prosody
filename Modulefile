@@ -1,5 +1,5 @@
 name    'mayflower-prosody'
-version '0.1.2'
+version '0.1.3'
 source 'https://github.com/Mayflower/puppet-prosody'
 author 'Mayflower'
 license 'Apache License, Version 2.0'
