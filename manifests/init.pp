@@ -23,19 +23,20 @@ class prosody (
   $virtualhosts = {},
   $virtualhost_defaults = {},
 ) {
+  validate_array($community_modules)
+
+  if ($community_modules != []) {
+    class { 'prosody::community_modules':
+      require => Class['prosody::package'],
+      before  => Class['prosody::config'],
+    }
+  }
+
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
   class { 'prosody::config': }  ->
   class { 'prosody::service': } ->
   anchor { 'prosody::end': }
-
-  if ($community_modules != [] and $community_modules != undef) {
-    class { 'prosody::community_modules':
-      modules => $community_modules,
-      require => Class['prosody::package'],
-      before  => Class['prosody::service'],
-    }
-  }
 
   # create virtualhost resources via hiera
   create_resources('prosody::virtualhost', $virtualhosts, $virtualhost_defaults)
