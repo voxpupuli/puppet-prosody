@@ -25,6 +25,10 @@ admins = {
 <% end -%>
 }
 
+-- User to run prosody as
+prosody_user = "<%= scope.lookupvar('prosody::user') %>"
+prosody_group = "<%= scope.lookupvar('prosody::group') %>"
+
 -- Which interfaces (addresses) to listen on
 interfaces = {
 <% scope.lookupvar('prosody::interfaces').each do |interface| -%>
