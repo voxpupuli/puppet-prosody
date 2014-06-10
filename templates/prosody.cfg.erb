@@ -138,7 +138,7 @@ s2s_secure_domains = {
 <% end -%>
 
 -- Required for init scripts and prosodyctl
-pidfile = "/var/run/prosody/prosody.pid"
+pidfile = "<%= scope.lookupvar('prosody::pidfile') %>"
 
 -- Select the authentication backend to use. The 'internal' providers
 -- use Prosody's configured data storage to store the authentication data.

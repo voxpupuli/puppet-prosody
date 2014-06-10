@@ -1,5 +1,6 @@
 class prosody (
   $admins = [],
+  $pidfile = '/var/run/prosody/prosody.pid',
   $interfaces = ['0.0.0.0', '::'],
   $allow_registration = false,
   $ssl_protocol = 'tlsv1',
