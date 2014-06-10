@@ -10,7 +10,7 @@ module to use.
 
 ## Using
 
-**Note:** This module currently only supports Ubuntu.
+**Note:** This module has currently only been tested on Ubuntu and OpenBSD.
 
 ```puppet
 node default {
