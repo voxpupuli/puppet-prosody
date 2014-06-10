@@ -164,8 +164,8 @@ authentication = "<%= scope.lookupvar('prosody::authentication') %>"
 -- Logging configuration
 -- For advanced logging see http://prosody.im/doc/logging
 log = {
-	info = "/var/log/prosody/prosody.log"; -- Change 'info' to 'debug' for verbose logging
-	error = "/var/log/prosody/prosody.err";
+        info = "<%= scope.lookupvar('prosody::info_log') -%>"; -- Change 'info' to 'debug' for verbose logging
+        error = "<%= scope.lookupvar('prosody::error_log') -%>";
 	"*syslog";
 }
 
