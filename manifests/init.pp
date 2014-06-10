@@ -3,6 +3,8 @@ class prosody (
   $pidfile = '/var/run/prosody/prosody.pid',
   $user = 'root',
   $group = 'root',
+  $info_log = '/var/log/prosody/prosody.log',
+  $error_log = '/var/log/prosody/prosody.err',
   $interfaces = ['0.0.0.0', '::'],
   $allow_registration = false,
   $ssl_protocol = 'tlsv1',
