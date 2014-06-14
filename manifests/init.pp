@@ -20,17 +20,49 @@ class prosody (
   $s2s_insecure_domains = [],
   $s2s_secure_domains = [],
   $authentication = 'internal_plain',
-  $components = {},
   $modules_base = ['roster', 'saslauth', 'tls', 'dialback', 'disco', 'posix',
                    'private', 'vcard', 'version', 'uptime', 'time', 'ping',
                    'pep', 'admin_adhoc'],
   $modules = [],
   $community_modules = [],
-  $custom_options = {},
+  $components = {},
   $virtualhosts = {},
   $virtualhost_defaults = {},
+  $custom_options = {},
 ) {
+  validate_bool($use_libevent)
+  validate_bool($allow_registration)
+  validate_bool($c2s_require_encryption)
+  validate_bool($s2s_require_encryption)
+  validate_bool($s2s_secure_auth)
+
+  validate_string($pidfile)
+  validate_string($user)
+  validate_string($group)
+  validate_string($info_log)
+  validate_string($error_log)
+  validate_string($ssl_protocol)
+  validate_string($ssl_ciphers)
+  if $ssl_dhparam != undef {
+    validate_string($ssl_dhparam)
+  }
+  validate_string($ssl_curve)
+  validate_string($authentication)
+
+  validate_array($admins)
+  validate_array($log_sinks)
+  validate_array($interfaces)
+  validate_array($ssl_options)
+  validate_array($s2s_insecure_domains)
+  validate_array($s2s_secure_domains)
+  validate_array($modules_base)
+  validate_array($modules)
   validate_array($community_modules)
+
+  validate_hash($components)
+  validate_hash($virtualhosts)
+  validate_hash($virtualhost_defaults)
+  validate_hash($custom_options)
 
   if ($community_modules != []) {
     class { 'prosody::community_modules':
