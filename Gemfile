@@ -1,11 +1,25 @@
-source :gemcutter
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
-gem 'rake'
+group :development, :test do
+  gem 'rake', '10.1.1', :require => false
+  gem 'rspec-puppet', '>= 1.0.1', :require => false
+  gem 'puppetlabs_spec_helper', :require => false
+  gem 'serverspec', :require => false
+  gem 'puppet-lint', :require => false
+  gem 'simplecov', :require => false
+  gem 'beaker', :require => false
+  gem 'beaker-rspec', :require => false
+  gem 'rspec', '~> 2.11', :require => false
+end
 
-group :test do
-  gem 'rspec', '~> 2.11.0'
-  gem 'rspec-puppet'
-  gem 'puppet'
-  gem 'puppetlabs_spec_helper'
-  gem 'puppet-lint', '~> 0.2.0'
+if facterversion = ENV['FACTER_GEM_VERSION']
+  gem 'facter', facterversion, :require => false
+else
+  gem 'facter', :require => false
+end
+
+if puppetversion = ENV['PUPPET_GEM_VERSION']
+  gem 'puppet', puppetversion, :require => false
+else
+  gem 'puppet', :require => false
 end

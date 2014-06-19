@@ -3,11 +3,6 @@ require 'erb'
 
 describe 'prosody::virtualhost' do
   let(:title) { 'mockvirtualhost' }
-  let(:facts) {
-    {
-      :operatingsystem => 'Ubuntu'
-    }
-  }
 
   before :each do
     # This will be useful for rendering the template cleanly/easily
@@ -17,11 +12,9 @@ describe 'prosody::virtualhost' do
     @ssl_cert = 'UNSET'
   end
 
-  it { should include_class 'prosody' }
-
   def render_template
     path = File.expand_path(File.dirname(__FILE__) + "/../../templates/virtualhost.cfg.erb")
-    ERB.new(File.read(path)).result(binding)
+    ERB.new(File.read(path), 0, "-").result(binding)
   end
 
   context 'with no parameters' do
@@ -29,7 +22,8 @@ describe 'prosody::virtualhost' do
       should contain_file("#{title}.cfg.lua").with(
         :ensure  => 'present',
         :path    => "/etc/prosody/conf.avail/#{title}.cfg.lua",
-        :content => render_template
+        :content => render_template,
+        :notify  => 'Service[prosody]',
       )
     }
 
@@ -38,7 +32,7 @@ describe 'prosody::virtualhost' do
         :ensure  => 'link',
         :target  => "/etc/prosody/conf.avail/#{title}.cfg.lua",
         :require => "File[#{title}.cfg.lua]",
-        :notify  => 'Service[prosody]'
+        :notify  => 'Service[prosody]',
       )
     }
   end
@@ -86,7 +80,7 @@ describe 'prosody::virtualhost' do
     it {
       @ensure = 'absent'
       should contain_file("#{title}.cfg.lua").with(
-        :ensure  => 'present',
+        :ensure  => @ensure,
         :content => render_template
       )
     }
