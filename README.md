@@ -1,5 +1,7 @@
 ![Prosody](http://prosody.im/prosody.png)
 
+[![Build Status](https://travis-ci.org/Mayflower/puppet-prosody.svg?branch=master)](https://travis-ci.org/Mayflower/puppet-prosody)
+
 Puppet module for the [Prosody](http://prosody.im/) Jabber/XMPP server.
 
 This module is a fork of rtyler/puppet-prosody because the upstream is dead. A
