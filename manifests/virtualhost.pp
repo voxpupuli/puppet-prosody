@@ -20,12 +20,12 @@ define prosody::virtualhost(
     file {
       $prosody_ssl_key:
         source => $ssl_key,
-        owner  => prosody,
-        group  => prosody;
+        owner  => $prosody::user,
+        group  => $prosody::group;
       $prosody_ssl_cert:
         source => $ssl_cert,
-        owner  => prosody,
-        group  => prosody;
+        owner  => $prosody::user,
+        group  => $prosody::group;
     }
 
     $config_requires = [File[$prosody_ssl_key], File[$prosody_ssl_cert], Class[prosody::package]]
