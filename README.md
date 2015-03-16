@@ -1,6 +1,6 @@
 ![Prosody](http://prosody.im/prosody.png)
 
-[![Build Status](https://travis-ci.org/Mayflower/puppet-prosody.svg?branch=master)](https://travis-ci.org/Mayflower/puppet-prosody)
+[![Build Status](https://travis-ci.org/mayflower/puppet-prosody.svg?branch=master)](https://travis-ci.org/mayflower/puppet-prosody)
 
 Puppet module for the [Prosody](http://prosody.im/) Jabber/XMPP server.
 
@@ -27,4 +27,4 @@ node default {
 
 ## Support
 
-Please file bugs and enhancement requests in the [GitHub issue tracker](https://github.com/rtyler/puppet-prosody/issues)
+Please file bugs and enhancement requests in the [GitHub issue tracker](https://github.com/mayflower/puppet-prosody/issues)
