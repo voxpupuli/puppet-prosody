@@ -8,7 +8,8 @@
   "issues_url": "https://github.com/mayflower/puppet-prosody/issues",
   "description": "This module supports most configuration options and installing community modules",
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0" }
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0" },
+    { "name": "puppetlabs/vcsrepo", "version_requirement": "1.x" }
   ],
     "requirements": [
     { "name": "puppet", "version_requirement": "3.x" },
