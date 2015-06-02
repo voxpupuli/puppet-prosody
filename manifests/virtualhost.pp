@@ -1,16 +1,16 @@
 define prosody::virtualhost(
   $ensure='present',
-  $ssl_key='UNSET',
-  $ssl_cert='UNSET'
+  $ssl_key=undef,
+  $ssl_cert=undef
 ) {
-  if (($ssl_key != 'UNSET') and ($ssl_cert == 'UNSET')) {
+  if (($ssl_key != undef) and ($ssl_cert == undef)) {
     fail('The prosody::virtualhost type needs both ssl_key *and* ssl_cert set')
   }
-  if (($ssl_key == 'UNSET') and ($ssl_cert != 'UNSET')) {
+  if (($ssl_key == undef) and ($ssl_cert != undef)) {
     fail('The prosody::virtualhost type needs both ssl_key *and* ssl_cert set')
   }
 
-  if (($ssl_key != 'UNSET') and ($ssl_cert != 'UNSET')) {
+  if (($ssl_key != undef) and ($ssl_cert != undef)) {
     $config_requires = [File[$ssl_key], File[$ssl_cert], Class[prosody::package]]
   }
   else {

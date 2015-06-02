@@ -8,8 +8,6 @@ describe 'prosody::virtualhost' do
     # This will be useful for rendering the template cleanly/easily
     @name = title
     @ensure = 'present'
-    @ssl_key = 'UNSET'
-    @ssl_cert = 'UNSET'
   end
 
   def render_template
@@ -41,7 +39,7 @@ describe 'prosody::virtualhost' do
     let(:params) { {:ssl_key => 'bananas' } }
     it {
       expect {
-        should include_class('prosody')
+        should contain_class('prosody')
       }.to raise_error(Puppet::Error)
     }
   end
@@ -50,7 +48,7 @@ describe 'prosody::virtualhost' do
     let(:params) { {:ssl_cert => 'bananas' } }
     it {
       expect {
-        should include_class('prosody')
+        should contain_class('prosody')
       }.to raise_error(Puppet::Error)
     }
   end
