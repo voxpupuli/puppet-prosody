@@ -3,6 +3,7 @@ class prosody (
   $pidfile = '/var/run/prosody/prosody.pid',
   $user = 'root',
   $group = 'root',
+  $allow_root = false,
   $info_log = '/var/log/prosody/prosody.log',
   $error_log = '/var/log/prosody/prosody.err',
   $log_sinks = ['syslog'],
@@ -30,6 +31,7 @@ class prosody (
   $virtualhost_defaults = {},
   $custom_options = {},
 ) {
+  validate_bool($allow_root)
   validate_bool($use_libevent)
   validate_bool($allow_registration)
   validate_bool($c2s_require_encryption)
