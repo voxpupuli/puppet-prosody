@@ -22,7 +22,7 @@ define prosody::virtualhost(
     require => $config_requires,
     path    => "/etc/prosody/conf.avail/${name}.cfg.lua",
     content => template('prosody/virtualhost.cfg.erb'),
-    notify  => Service[prosody];
+    notify  => $prosody::daemonize ? Service[prosody] : undef;
   }
 
   $cfg_ensure = $ensure ? {
