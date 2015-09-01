@@ -17,12 +17,19 @@ define prosody::virtualhost(
     $config_requires = Class[prosody::package]
   }
 
+  if defined(Service['prosody']) {
+    $cfg_notify = Service['prosody']
+  }
+  else {
+    $cfg_notify = undef
+  }
+
   file { "${name}.cfg.lua":
     ensure  => $ensure,
     require => $config_requires,
     path    => "/etc/prosody/conf.avail/${name}.cfg.lua",
     content => template('prosody/virtualhost.cfg.erb'),
-    notify  => $prosody::daemonize ? Service[prosody] : undef;
+    notify  => $cfg_notify,
   }
 
   $cfg_ensure = $ensure ? {
@@ -33,7 +40,7 @@ define prosody::virtualhost(
   file { "/etc/prosody/conf.d/${name}.cfg.lua":
     ensure  => $cfg_ensure,
     target  => "/etc/prosody/conf.avail/${name}.cfg.lua",
-    notify  => Service[prosody],
+    notify  => $cfg_notify,
     require => File["${name}.cfg.lua"];
   }
 }

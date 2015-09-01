@@ -7,9 +7,16 @@ class prosody::config {
     ensure => directory,
   }
 
+  if defined(Service['prosody']) {
+    $cfg_notify = Service['prosody']
+  }
+  else {
+    $cfg_notify = undef
+  }
+
   file { '/etc/prosody/prosody.cfg.lua':
     content => template('prosody/prosody.cfg.erb'),
     require => Class[prosody::package],
-    notify  => $prosody::daemonize ? Service['prosody'] : undef,
+    notify  => $cfg_notify,
   }
 }
