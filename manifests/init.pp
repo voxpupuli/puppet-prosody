@@ -3,6 +3,7 @@ class prosody (
   $pidfile = '/var/run/prosody/prosody.pid',
   $user = 'root',
   $group = 'root',
+  $daemonize = true,
   $info_log = '/var/log/prosody/prosody.log',
   $error_log = '/var/log/prosody/prosody.err',
   $log_sinks = ['syslog'],
@@ -35,6 +36,7 @@ class prosody (
   validate_bool($c2s_require_encryption)
   validate_bool($s2s_require_encryption)
   validate_bool($s2s_secure_auth)
+  validate_bool($daemonize)
 
   validate_string($pidfile)
   validate_string($user)
