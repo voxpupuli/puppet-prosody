@@ -75,7 +75,8 @@ class prosody (
 
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
-  class { 'prosody::config': }  ->
+  class { 'prosody::config':
+    daemonize => $daemonize,}  ->
   class { 'prosody::service':
     daemonize => $daemonize,
   } ->

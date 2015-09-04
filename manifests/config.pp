@@ -1,4 +1,5 @@
-class prosody::config {
+class prosody::config($daemonize = $prosody::params::daemonize)
+  inherits prosody::params {
   file { '/etc/prosody/conf.avail':
     ensure => directory,
   }
@@ -7,7 +8,7 @@ class prosody::config {
     ensure => directory,
   }
 
-  if defined(Service['prosody']) {
+  if $daemonize {
     $cfg_notify = Service['prosody']
   }
   else {
