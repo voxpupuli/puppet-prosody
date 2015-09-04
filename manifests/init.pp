@@ -9,6 +9,7 @@ class prosody (
   $use_libevent           = $::prosody::params::use_libevent,
   $interfaces             = $::prosody::params::interfaces,
   $allow_registration     = $::prosody::params::allow_registration,
+  $allow_root             = $::prosody::params::allow_root,
   $ssl_protocol           = $::prosody::params::ssl_protocol,
   $ssl_options            = $::prosody::params::ssl_options,
   $ssl_ciphers            = $::prosody::params::ssl_ciphers,
@@ -28,6 +29,7 @@ class prosody (
   $virtualhost_defaults   = $::prosody::params::virtualhost_defaults,
   $custom_options         = $::prosody::params::custom_options,
 ) inherits prosody::params {
+  validate_bool($allow_root)
   validate_bool($use_libevent)
   validate_bool($allow_registration)
   validate_bool($c2s_require_encryption)

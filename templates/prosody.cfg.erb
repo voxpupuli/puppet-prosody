@@ -26,6 +26,7 @@ admins = {
 }
 
 -- User to run prosody as
+run_as_root = <%= scope.lookupvar('prosody::allow_root') %>
 prosody_user = "<%= scope.lookupvar('prosody::user') %>"
 prosody_group = "<%= scope.lookupvar('prosody::group') %>"
 

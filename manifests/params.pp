@@ -9,6 +9,7 @@ class prosody::params {
   $use_libevent           = true
   $interfaces             = ['0.0.0.0', '::']
   $allow_registration     = false
+  $allow_root             = false
   $ssl_protocol           = 'tlsv1'
   $ssl_options            = ['no_ticket', 'no_compression', 'cipher_server_preference']
   $ssl_ciphers            = 'DH+AES:ECDH+AES:+ECDH+SHA:AES:!PSK:!SRP:!DSS:!ADH:!AECDH'
