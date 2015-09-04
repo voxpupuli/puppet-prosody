@@ -79,7 +79,7 @@ allow_registration = <%= scope.lookupvar('prosody::allow_registration') %>;
 -- Debian:
 --   send the server to background.
 --
-daemonize = true;
+daemonize = <%= scope.lookupvar('prosody::daemonize') %>;
 
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this

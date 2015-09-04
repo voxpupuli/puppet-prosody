@@ -8,6 +8,7 @@ class prosody (
   $log_sinks              = $::prosody::params::log_sinks,
   $use_libevent           = $::prosody::params::use_libevent,
   $interfaces             = $::prosody::params::interfaces,
+  $daemonize              = $::prosody::params::daemonize,
   $allow_registration     = $::prosody::params::allow_registration,
   $ssl_protocol           = $::prosody::params::ssl_protocol,
   $ssl_options            = $::prosody::params::ssl_options,
@@ -29,6 +30,7 @@ class prosody (
   $custom_options         = $::prosody::params::custom_options,
 ) inherits prosody::params {
   validate_bool($use_libevent)
+  validate_bool($daemonize)
   validate_bool($allow_registration)
   validate_bool($c2s_require_encryption)
   validate_bool($s2s_require_encryption)
@@ -72,7 +74,9 @@ class prosody (
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
   class { 'prosody::config': }  ->
-  class { 'prosody::service': } ->
+  class { 'prosody::service':
+    daemonize => $daemonize,
+  } ->
   anchor { 'prosody::end': }
 
   # create virtualhost resources via hiera

@@ -8,6 +8,7 @@ class prosody::params {
   $log_sinks              = ['syslog']
   $use_libevent           = true
   $interfaces             = ['0.0.0.0', '::']
+  $daemonize              = true
   $allow_registration     = false
   $ssl_protocol           = 'tlsv1'
   $ssl_options            = ['no_ticket', 'no_compression', 'cipher_server_preference']
