@@ -1,7 +1,8 @@
 define prosody::virtualhost(
-  $ensure='present',
-  $ssl_key=undef,
-  $ssl_cert=undef
+  $ensure    = present,
+  $ssl_key   = undef,
+  $ssl_cert  = undef,
+  $daemonize = true,
 ) {
   if (($ssl_key != undef) and ($ssl_cert == undef)) {
     fail('The prosody::virtualhost type needs both ssl_key *and* ssl_cert set')
@@ -17,7 +18,7 @@ define prosody::virtualhost(
     $config_requires = Class[prosody::package]
   }
 
-  if defined(Service['prosody']) {
+  if $daemonize {
     $cfg_notify = Service['prosody']
   }
   else {
