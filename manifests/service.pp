@@ -1,4 +1,4 @@
-class prosody::service($daemonize) {
+class prosody::service($daemonize = $prosody::params::daemonize) {
   if $daemonize {
     case $::osfamily {
       'OpenBSD': {
