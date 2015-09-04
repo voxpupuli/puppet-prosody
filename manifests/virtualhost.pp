@@ -1,7 +1,8 @@
 define prosody::virtualhost(
-  $ensure='present',
-  $ssl_key=undef,
-  $ssl_cert=undef
+  $ensure    = present,
+  $ssl_key   = undef,
+  $ssl_cert  = undef,
+  $daemonize = true,
 ) {
   if (($ssl_key != undef) and ($ssl_cert == undef)) {
     fail('The prosody::virtualhost type needs both ssl_key *and* ssl_cert set')
@@ -17,12 +18,19 @@ define prosody::virtualhost(
     $config_requires = Class[prosody::package]
   }
 
+  if $daemonize {
+    $cfg_notify = Service['prosody']
+  }
+  else {
+    $cfg_notify = undef
+  }
+
   file { "${name}.cfg.lua":
     ensure  => $ensure,
     require => $config_requires,
     path    => "/etc/prosody/conf.avail/${name}.cfg.lua",
     content => template('prosody/virtualhost.cfg.erb'),
-    notify  => Service[prosody];
+    notify  => $cfg_notify,
   }
 
   $cfg_ensure = $ensure ? {
@@ -33,7 +41,7 @@ define prosody::virtualhost(
   file { "/etc/prosody/conf.d/${name}.cfg.lua":
     ensure  => $cfg_ensure,
     target  => "/etc/prosody/conf.avail/${name}.cfg.lua",
-    notify  => Service[prosody],
+    notify  => $cfg_notify,
     require => File["${name}.cfg.lua"];
   }
 }

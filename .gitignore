@@ -3,3 +3,5 @@ Gemfile.lock
 tmp
 .rvmrc
 pkg
+coverage/*
+spec/fixtures/*

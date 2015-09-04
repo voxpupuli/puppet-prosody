@@ -35,6 +35,15 @@ describe 'prosody::virtualhost' do
     }
   end
 
+  context 'with daemonize set to false' do
+    let(:params) { {:daemonize => false} }
+    it {
+      should_not contain_file("/etc/prosody/conf.d/#{title}.cfg.lua").with(
+        :notify => 'Service[prosody]',
+      )
+    }
+  end
+
   context 'with ssl_key but no ssl_cert' do
     let(:params) { {:ssl_key => 'bananas' } }
     it {
