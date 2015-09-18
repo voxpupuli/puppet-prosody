@@ -1,6 +1,6 @@
 class prosody::community_modules (
   $ensure = 'present',
-  $path = '/var/lib/prosody/modules',
+  $path = undef,
   $type = 'hg',
   $source = 'https://code.google.com/p/prosody-modules/',
   $revision = undef,
