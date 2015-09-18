@@ -1,8 +1,8 @@
 class prosody (
   $admins = [],
   $pidfile = '/var/run/prosody/prosody.pid',
-  $user = 'root',
-  $group = 'root',
+  $user = 'prosody',
+  $group = 'prosody',
   $info_log = '/var/log/prosody/prosody.log',
   $error_log = '/var/log/prosody/prosody.err',
   $log_sinks = ['syslog'],
