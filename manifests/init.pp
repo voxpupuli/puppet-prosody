@@ -24,6 +24,7 @@ class prosody (
                    'private', 'vcard', 'version', 'uptime', 'time', 'ping',
                    'pep', 'admin_adhoc'],
   $modules = [],
+  $module_path = '/var/lib/prosody/modules',
   $community_modules = [],
   $components = {},
   $virtualhosts = {},
@@ -66,6 +67,7 @@ class prosody (
 
   if ($community_modules != []) {
     class { 'prosody::community_modules':
+      path    => $module_path,
       require => Class['prosody::package'],
       before  => Class['prosody::config'],
     }
