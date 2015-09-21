@@ -12,15 +12,31 @@ module to use.
 
 ## Using
 
-**Note:** This module has currently only been tested on Ubuntu and OpenBSD.
+**Note:** This module has currently been tested on CentOS 7, Ubuntu and OpenBSD.
 
 ```puppet
-node default {
-  include prosody
+node myserver {
+
+  class { 'prosody':
+    user              => 'prosody',
+    group             => 'prosody',
+    community_modules => ['mod_auth_ldap'],
+    authentication    => 'ldap',
+    custom_options    => {
+                            'ldap_base'     => 'OU="accounts",DC="mydomain",DC="com"',
+                            'ldap_server'   => 'ldapserver1:636 ldapserver2:636',
+                            'ldap_rootdn'   => 'DN="prosody",OU="accounts",DC="mydomain",DC="com"',
+                            'ldap_password' => hiera(prosody-ldap-password),
+                            'ldap_scope'    => 'subtree',
+                            'ldap_tls'      => 'true',
+                          },
+  }
 
   prosody::virtualhost {
     'mydomain.com' :
-      ensure => present;
+      ensure   => present,
+      ssl_key  => '/etc/ssl/key/mydomain.com.key',
+      ssl_cert => '/etc/ssl/crt/mydomain.com.crt',
   }
 }
 ```
