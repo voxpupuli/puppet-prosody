@@ -21,9 +21,11 @@ class prosody (
   $s2s_insecure_domains   = [],
   $s2s_secure_domains     = [],
   $authentication         = 'internal_plain',
-  $modules_base           = ['roster', 'saslauth', 'tls', 'dialback', 'disco',
-                             'posix', 'private', 'vcard', 'version', 'uptime',
-                             'time', 'ping', 'pep', 'admin_adhoc'],
+  $modules_base           = [
+    'roster', 'saslauth', 'tls', 'dialback', 'disco',
+    'posix', 'private', 'vcard', 'version', 'uptime',
+    'time', 'ping', 'pep', 'admin_adhoc'
+  ],
   $modules                = [],
   $community_modules      = [],
   $components             = {},
