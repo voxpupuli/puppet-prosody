@@ -1,7 +1,7 @@
 .rvmrc
+.bundle
 Gemfile.lock
-tmp
-.rvmrc
 pkg
+vendor
 coverage/*
 spec/fixtures/*
