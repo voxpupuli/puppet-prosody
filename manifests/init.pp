@@ -75,11 +75,8 @@ class prosody (
 
   anchor { 'prosody::begin': }  ->
   class { 'prosody::package': } ->
-  class { 'prosody::config':
-    daemonize => $daemonize,}  ->
-  class { 'prosody::service':
-    daemonize => $daemonize,
-  } ->
+  class { 'prosody::config': }  ->
+  class { 'prosody::service': } ->
   anchor { 'prosody::end': }
 
   # create virtualhost resources via hiera

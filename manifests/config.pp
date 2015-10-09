@@ -1,5 +1,4 @@
-class prosody::config($daemonize = $prosody::params::daemonize)
-  inherits prosody::params {
+class prosody::config {
   file { '/etc/prosody/conf.avail':
     ensure => directory,
   }
@@ -8,16 +7,9 @@ class prosody::config($daemonize = $prosody::params::daemonize)
     ensure => directory,
   }
 
-  if $daemonize {
-    $cfg_notify = Service['prosody']
-  }
-  else {
-    $cfg_notify = undef
-  }
-
   file { '/etc/prosody/prosody.cfg.lua':
     content => template('prosody/prosody.cfg.erb'),
-    require => Class[prosody::package],
-    notify  => $cfg_notify,
+    require => Class['::prosody::package'],
+    notify  => Class['::prosody::service'],
   }
 }

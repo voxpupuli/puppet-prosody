@@ -21,7 +21,6 @@ describe 'prosody::virtualhost' do
         :ensure  => 'present',
         :path    => "/etc/prosody/conf.avail/#{title}.cfg.lua",
         :content => render_template,
-        :notify  => 'Service[prosody]',
       )
     }
 
@@ -30,16 +29,6 @@ describe 'prosody::virtualhost' do
         :ensure  => 'link',
         :target  => "/etc/prosody/conf.avail/#{title}.cfg.lua",
         :require => "File[#{title}.cfg.lua]",
-        :notify  => 'Service[prosody]',
-      )
-    }
-  end
-
-  context 'with daemonize set to false' do
-    let(:params) { {:daemonize => false} }
-    it {
-      should_not contain_file("/etc/prosody/conf.d/#{title}.cfg.lua").with(
-        :notify => 'Service[prosody]',
       )
     }
   end
