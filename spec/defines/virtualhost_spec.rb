@@ -5,36 +5,28 @@ describe 'prosody::virtualhost' do
   let(:title) { 'mockvirtualhost' }
 
   before :each do
-    # This will be useful for rendering the template cleanly/easily
-    @name = title
-    @ensure = 'present'
-  end
-
-  def render_template
-    path = File.expand_path(File.dirname(__FILE__) + "/../../templates/virtualhost.cfg.erb")
-    ERB.new(File.read(path), 0, "-").result(binding)
+    @path_avail = "/etc/prosody/conf.avail/#{title}.cfg.lua"
+    @path_link = "/etc/prosody/conf.d/#{title}.cfg.lua"
   end
 
   context 'with no parameters' do
     it {
-      should contain_file("#{title}.cfg.lua").with(
+      should contain_file(@path_avail).with(
         :ensure  => 'present',
-        :path    => "/etc/prosody/conf.avail/#{title}.cfg.lua",
-        :content => render_template,
       )
     }
 
     it {
-      should contain_file("/etc/prosody/conf.d/#{title}.cfg.lua").with(
+      should contain_file(@path_link).with(
         :ensure  => 'link',
-        :target  => "/etc/prosody/conf.avail/#{title}.cfg.lua",
-        :require => "File[#{title}.cfg.lua]",
+        :target  => @path_avail,
+        :require => "File[#{@path_avail}]",
       )
     }
   end
 
   context 'with ssl_key but no ssl_cert' do
-    let(:params) { {:ssl_key => 'bananas' } }
+    let(:params) { { :ssl_key => 'bananas' } }
     it {
       expect {
         should contain_class('prosody')
@@ -43,7 +35,7 @@ describe 'prosody::virtualhost' do
   end
 
   context 'with ssl_cert but no ssl_key' do
-    let(:params) { {:ssl_cert => 'bananas' } }
+    let(:params) { { :ssl_cert => 'bananas' } }
     it {
       expect {
         should contain_class('prosody')
@@ -63,9 +55,8 @@ describe 'prosody::virtualhost' do
 
     it {
       # This require statment is bananas
-      should contain_file("#{title}.cfg.lua").with(
+      should contain_file(@path_avail).with(
         :ensure  => 'present',
-        :content => render_template,
         :require => ["File[#{ssl_key}]", "File[#{ssl_cert}]", 'Class[Prosody::Package]']
       )
     }
@@ -75,14 +66,13 @@ describe 'prosody::virtualhost' do
     let(:params) { { :ensure => 'absent' } }
     it {
       @ensure = 'absent'
-      should contain_file("#{title}.cfg.lua").with(
+      should contain_file(@path_avail).with(
         :ensure  => @ensure,
-        :content => render_template
       )
     }
 
     it {
-      should contain_file("/etc/prosody/conf.d/#{title}.cfg.lua").with_ensure('absent')
+      should contain_file(@path_link).with_ensure('absent')
     }
   end
 end
