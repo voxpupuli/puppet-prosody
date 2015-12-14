@@ -27,7 +27,7 @@ define prosody::virtualhost (
         group  => $::prosody::group;
     }
 
-    $config_requires = [File[$ssl_key], File[$ssl_cert], Class['::prosody::package']]
+    $config_requires = [File[$prosody_ssl_key], File[$prosody_ssl_cert], Class['::prosody::package']]
   }
   else {
     $config_requires = Class['::prosody::package']
