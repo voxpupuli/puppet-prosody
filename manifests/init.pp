@@ -1,4 +1,6 @@
 class prosody (
+  $package_name           = 'prosody',
+  $package_ensure         = 'present',
   $admins                 = [],
   $pidfile                = '/var/run/prosody/prosody.pid',
   $user                   = 'prosody',
@@ -52,6 +54,8 @@ class prosody (
   }
   validate_string($ssl_curve)
   validate_string($authentication)
+  validate_string($package_name)
+  validate_string($package_ensure)
 
   validate_array($admins)
   validate_array($log_sinks)
