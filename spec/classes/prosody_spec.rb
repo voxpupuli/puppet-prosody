@@ -5,6 +5,8 @@ describe 'prosody' do
     it { should contain_class 'prosody::package' }
     it { should contain_class 'prosody::config' }
     it { should contain_class 'prosody::service' }
+
+    it { should contain_package('prosody').with(:ensure => 'present') }
   end
 
   context 'with daemonize => true' do

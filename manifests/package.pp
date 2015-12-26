@@ -1,5 +1,5 @@
 class prosody::package {
-  package { 'prosody' :
-    ensure  => present,
+  package { $::prosody::package_name:
+    ensure  => $::prosody::package_ensure,
   }
 }
