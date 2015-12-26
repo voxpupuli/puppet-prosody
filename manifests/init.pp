@@ -10,6 +10,8 @@ class prosody (
   $interfaces             = ['0.0.0.0', '::'],
   $daemonize              = true,
   $allow_registration     = false,
+  $ssl_key                = undef,
+  $ssl_cert               = undef,
   $ssl_protocol           = 'tlsv1',
   $ssl_options            = ['no_ticket', 'no_compression', 'cipher_server_preference'],
   $ssl_ciphers            = 'DH+AES:ECDH+AES:+ECDH+SHA:AES:!PSK:!SRP:!DSS:!ADH:!AECDH',
@@ -49,6 +51,12 @@ class prosody (
   validate_string($ssl_ciphers)
   if $ssl_dhparam != undef {
     validate_string($ssl_dhparam)
+  }
+  if $ssl_key != undef {
+    validate_string($ssl_key)
+  }
+  if $ssl_cert != undef {
+    validate_string($ssl_cert)
   }
   validate_string($ssl_curve)
   validate_string($authentication)
