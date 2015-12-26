@@ -21,6 +21,8 @@ class prosody (
   $s2s_insecure_domains   = [],
   $s2s_secure_domains     = [],
   $authentication         = 'internal_plain',
+  $storage                = 'internal',
+  $sql                    = undef,
   $modules_base           = [
     'roster', 'saslauth', 'tls', 'dialback', 'disco',
     'posix', 'private', 'vcard', 'version', 'uptime',
