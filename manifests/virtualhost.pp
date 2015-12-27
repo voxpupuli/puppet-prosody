@@ -1,7 +1,8 @@
 define prosody::virtualhost (
-  $ensure    = present,
-  $ssl_key   = undef,
-  $ssl_cert  = undef,
+  $custom_options = {},
+  $ensure         = present,
+  $ssl_key        = undef,
+  $ssl_cert       = undef,
 ) {
   # Check if SSL set correctly
   if (($ssl_key != undef) and ($ssl_cert == undef)) {
