@@ -27,6 +27,7 @@ class prosody (
     'time', 'ping', 'pep', 'admin_adhoc'
   ],
   $modules                = [],
+  $modules_disabled       = [],
   $community_modules      = [],
   $components             = {},
   $virtualhosts           = {},
@@ -61,6 +62,7 @@ class prosody (
   validate_array($s2s_secure_domains)
   validate_array($modules_base)
   validate_array($modules)
+  validate_array($modules_disabled)
   validate_array($community_modules)
 
   validate_hash($components)
