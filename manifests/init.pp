@@ -28,6 +28,7 @@ class prosody (
   ],
   $modules                = [],
   $community_modules      = [],
+  $disabled_modules       = [],
   $components             = {},
   $virtualhosts           = {},
   $virtualhost_defaults   = {},
