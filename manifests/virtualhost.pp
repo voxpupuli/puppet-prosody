@@ -3,6 +3,7 @@ define prosody::virtualhost (
   $ensure         = present,
   $ssl_key        = undef,
   $ssl_cert       = undef,
+  $components     = {},
 ) {
   # Check if SSL set correctly
   if (($ssl_key != undef) and ($ssl_cert == undef)) {
