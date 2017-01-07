@@ -194,7 +194,7 @@ sql = { driver = "<%= sql['driver'] %>", database = "<%= sql ['database'] %>", u
 -- Logging configuration
 -- For advanced logging see http://prosody.im/doc/logging
 log = {
-        info = "<%= scope.lookupvar('prosody::info_log') -%>"; -- Change 'info' to 'debug' for verbose logging
+        <%= scope.lookupvar('prosody::log_level') -%> = "<%= scope.lookupvar('prosody::info_log') -%>"; -- Change 'info' to 'debug' for verbose logging
         error = "<%= scope.lookupvar('prosody::error_log') -%>";
 <% scope.lookupvar('prosody::log_sinks').each do |sink|  -%>
         "*<%= sink %>";

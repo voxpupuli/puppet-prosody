@@ -5,6 +5,7 @@ class prosody (
   $pidfile                = '/var/run/prosody/prosody.pid',
   $user                   = 'prosody',
   $group                  = 'prosody',
+  $log_level              = 'info',
   $info_log               = '/var/log/prosody/prosody.log',
   $error_log              = '/var/log/prosody/prosody.err',
   $log_sinks              = ['syslog'],
