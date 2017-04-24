@@ -17,7 +17,7 @@ class prosody (
   $ssl_protocol           = 'tlsv1',
   $ssl_options            = ['no_ticket', 'no_compression', 'cipher_server_preference'],
   $ssl_ciphers            = 'DH+AES:ECDH+AES:+ECDH+SHA:AES:!PSK:!SRP:!DSS:!ADH:!AECDH',
-  $ssl_dhparam            = undef,
+  $ssl_dhparam            = '',
   $ssl_curve              = 'secp521r1',
   $c2s_require_encryption = true,
   $s2s_require_encryption = true,

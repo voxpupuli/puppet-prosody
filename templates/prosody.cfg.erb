@@ -100,7 +100,7 @@ ssl = {
   ciphers = "<%= scope.lookupvar('prosody::ssl_ciphers') %>";
   curve = "<%= scope.lookupvar('prosody::ssl_curve') %>";
   <%- dhparam = scope.lookupvar('prosody::ssl_dhparam')
-      if dhparam != :undef -%>
+      if dhparam != '' -%>
   dhparam = "<%= dhparam %>";
   <%- end -%>
   <%- ssl_key = scope.lookupvar('prosody::ssl_key')
