@@ -68,9 +68,16 @@ plugin_paths = {
 };
 <%- end -%>
 
+<%- modules_disabled = scope.lookupvar('prosody::modules_disabled')
+    if modules_disabled != [] -%>
 -- These modules are auto-loaded, but should you want
 -- to disable them then uncomment them here:
-modules_disabled = {};
+modules_disabled = {
+<% scope.lookupvar('prosody::modules_disabled').each do |mod| -%>
+    "<%= mod %>";
+<%- end -%>
+};
+<%- end -%>
 
 -- Disable account creation by default, for security
 -- For more information see http://prosody.im/doc/creating_accounts
