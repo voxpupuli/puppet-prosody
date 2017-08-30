@@ -7,18 +7,18 @@ group :development, :test do
   gem 'serverspec'
   gem 'puppet-lint'
   gem 'simplecov'
-  gem 'beaker'
-  gem 'beaker-rspec'
   gem 'rspec'
+  gem 'metadata-json-lint'
+  gem 'semantic_puppet'
 end
 
-if facterversion = ENV['FACTER_GEM_VERSION']
+if facterversion = ENV['FACTER_VERSION']
   gem 'facter', facterversion
 else
   gem 'facter'
 end
 
-if puppetversion = ENV['PUPPET_GEM_VERSION']
+if puppetversion = ENV['PUPPET_VERSION']
   gem 'puppet', puppetversion
 else
   gem 'puppet'

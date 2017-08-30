@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "author": "Franz Pletz",
   "summary": "Simple Puppet module for managing the Prosody Jabber/XMPP server",
-  "license": "Apache License, Version 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/mayflower/puppet-prosody",
   "issues_url": "https://github.com/mayflower/puppet-prosody/issues",
   "description": "This module supports most configuration options and installing community modules",
@@ -12,7 +12,6 @@
     { "name": "puppetlabs/vcsrepo", "version_requirement": "1.x" }
   ],
     "requirements": [
-    { "name": "puppet", "version_requirement": "3.x" },
-    { "name": "pe", "version_requirement": "3.x" }
+    { "name": "puppet", "version_requirement": "3.x" }
   ]
 }
