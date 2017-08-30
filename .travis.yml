@@ -2,6 +2,5 @@ language: ruby
 script: "bundle exec rake validate spec"
 rvm:
   - 2.1.9
-  - 2.0.0
 env:
   - PUPPET_VERSION=3.8.7
