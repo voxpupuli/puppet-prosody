@@ -21,10 +21,12 @@ define prosody::virtualhost (
     file {
       $prosody_ssl_key:
         source => $ssl_key,
+        mode   => '0640',
         owner  => $::prosody::user,
         group  => $::prosody::group;
       $prosody_ssl_cert:
         source => $ssl_cert,
+        mode   => '0644',
         owner  => $::prosody::user,
         group  => $::prosody::group;
     }
