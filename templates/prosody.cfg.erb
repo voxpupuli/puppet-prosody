@@ -86,16 +86,24 @@ daemonize = <%= scope.lookupvar('prosody::daemonize') %>;
 ssl = {
   protocol = "<%= scope.lookupvar('prosody::ssl_protocol') %>";
   options = {
-  <% scope.lookupvar('prosody::ssl_options').each do |option| -%>
+  <%- scope.lookupvar('prosody::ssl_options').each do |option| -%>
     "<%= option %>",
-  <% end -%>
+  <%- end -%>
   };
   ciphers = "<%= scope.lookupvar('prosody::ssl_ciphers') %>";
   curve = "<%= scope.lookupvar('prosody::ssl_curve') %>";
   <%- dhparam = scope.lookupvar('prosody::ssl_dhparam')
       if dhparam != :undef -%>
   dhparam = "<%= dhparam %>";
-  <% end -%>
+  <%- end -%>
+  <%- ssl_key = scope.lookupvar('prosody::ssl_key')
+      if ssl_key != :undef -%>
+  key = "<%= ssl_key %>";
+  <%- end -%>
+  <%- ssl_cert = scope.lookupvar('prosody::ssl_cert')
+      if ssl_cert != :undef -%>
+  certificate = "<%= ssl_cert %>";
+  <%- end -%>
 }
 
 -- Force clients to use encrypted connections? This option will
