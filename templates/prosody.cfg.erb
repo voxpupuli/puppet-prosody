@@ -173,12 +173,23 @@ authentication = "<%= scope.lookupvar('prosody::authentication') %>"
 -- through modules. An "sql" backend is included by default, but requires
 -- additional dependencies. See http://prosody.im/doc/storage for more info.
 
---storage = "sql" -- Default is "internal"
+<%- storage = scope.lookupvar('prosody::storage')
+    if storage != :undef
+      if storage.is_a?(String) -%>
+storage = "<%= storage %>"
+  <%- elsif storage.is_a?(Hash) -%>
+storage = {
+        <%- storage.sort.each do |type,location| -%>
+   <%= type %> = "<%= location %>";
+        <%- end -%>
+}
+      <%- end -%>
+<%- end -%>
 
--- For the "sql" backend, you can uncomment *one* of the below to configure:
---sql = { driver = "SQLite3", database = "prosody.sqlite" } -- Default. 'database' is the filename.
---sql = { driver = "MySQL", database = "prosody", username = "prosody", password = "secret", host = "localhost" }
---sql = { driver = "PostgreSQL", database = "prosody", username = "prosody", password = "secret", host = "localhost" }
+<%- sql = scope.lookupvar('prosody::sql')
+    if sql != :undef -%>
+sql = { driver = "<%= sql['driver'] %>", database = "<%= sql ['database'] %>", username = "<%= sql['username'] %>", password = "<%= sql['password'] %>", host = "<%= sql['host'] %>" }
+<%- end -%>
 
 -- Logging configuration
 -- For advanced logging see http://prosody.im/doc/logging
