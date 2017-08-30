@@ -1,5 +1,5 @@
 language: ruby
-script: "bundle exec rake validate spec"
+script: "bundle exec rake validate lint spec"
 rvm:
   - 2.1.9
 env:

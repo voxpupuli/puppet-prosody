@@ -1,8 +1,8 @@
-require 'rubygems'
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
-PuppetLint.configuration.send('disable_80chars')
-PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
+
+PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "tests/**/*.pp", "pkg/**/*.pp", "vendor/**/*.pp"]
+PuppetLint.configuration.log_format = '%{path}:%{line}:%{KIND}: %{message}'
 
 desc "Validate manifests, templates, and ruby files"
 task :validate do
