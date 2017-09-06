@@ -18,6 +18,7 @@ group :development, :test do
   gem 'puppet-lint-leading_zero-check'
   gem 'puppet-lint-trailing_comma-check'
   gem 'puppet-lint-file_ensure-check'
+  gem 'puppet-blacksmith', '>= 3.1.0'
 
 end
 
