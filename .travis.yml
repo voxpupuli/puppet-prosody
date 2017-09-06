@@ -4,3 +4,4 @@ rvm:
   - 2.1.9
 env:
   - PUPPET_VERSION=3.8.7
+  - PUPPET_VERSION=4.10.6

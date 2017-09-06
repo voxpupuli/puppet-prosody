@@ -3,6 +3,8 @@ define prosody::virtualhost (
   $ensure         = present,
   $ssl_key        = undef,
   $ssl_cert       = undef,
+  $user           = undef,
+  $group          = undef,
   $components     = {},
 ) {
   # Check if SSL set correctly
@@ -18,19 +20,22 @@ define prosody::virtualhost (
     $prosody_ssl_key  = "/etc/prosody/certs/${name}.key"
     $prosody_ssl_cert = "/etc/prosody/certs/${name}.cert"
 
+    $file_user = pick_default($user, 'prosody')
+    $file_group = pick_default($group, 'prosody')
+
     file {
       $prosody_ssl_key:
         source => $ssl_key,
         links  => follow,
         mode   => '0640',
-        owner  => $::prosody::user,
-        group  => $::prosody::group;
+        owner  => $file_user,
+        group  => $file_group;
       $prosody_ssl_cert:
         source => $ssl_cert,
         links  => follow,
         mode   => '0644',
-        owner  => $::prosody::user,
-        group  => $::prosody::group;
+        owner  => $file_user,
+        group  => $file_group;
     }
 
     $config_requires = [File[$prosody_ssl_key], File[$prosody_ssl_cert], Class['::prosody::package']]

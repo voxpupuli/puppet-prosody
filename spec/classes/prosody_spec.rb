@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe 'prosody' do
+  let(:facts) do
+    { :osfamily => 'SomeOS' }
+  end
   context 'on every platform' do
     it { should contain_class 'prosody::package' }
     it { should contain_class 'prosody::config' }
