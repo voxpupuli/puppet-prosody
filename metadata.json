@@ -1,6 +1,6 @@
 {
   "name": "mayflower-prosody",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Franz Pletz",
   "summary": "Simple Puppet module for managing the Prosody Jabber/XMPP server",
   "license": "Apache-2.0",
@@ -12,7 +12,8 @@
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 3.2.0 < 5.0.0"
     },
-    { "name": "puppetlabs/vcsrepo",
+    {
+      "name": "puppetlabs/vcsrepo",
       "version_requirement": ">= 1.0.0 < 2.0.0"
     }
   ],
