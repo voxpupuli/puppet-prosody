@@ -91,7 +91,9 @@ daemonize = <%= scope.lookupvar('prosody::daemonize') %>;
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
+  <% unless scope.lookupvar('prosody::ssl_protocol').nil? -%>
   protocol = "<%= scope.lookupvar('prosody::ssl_protocol') %>";
+  <% end -%>
   options = {
   <%- scope.lookupvar('prosody::ssl_options').each do |option| -%>
     "<%= option %>",

@@ -15,8 +15,11 @@ class prosody (
   $allow_registration     = false,
   $ssl_key                = undef,
   $ssl_cert               = undef,
-  $ssl_protocol           = 'tlsv1',
-  $ssl_options            = ['no_ticket', 'no_compression', 'cipher_server_preference'],
+  $ssl_protocol           = undef,
+  $ssl_options            = [
+    'no_sslv2', 'no_sslv3', 'no_ticket', 'no_compression',
+    'cipher_server_preference', 'single_dh_use', 'single_ecdh_use',
+  ],
   $ssl_ciphers            = 'DH+AES:ECDH+AES:+ECDH+SHA:AES:!PSK:!SRP:!DSS:!ADH:!AECDH',
   $ssl_dhparam            = '', # lint:ignore:empty_string_assignment
   $ssl_curve              = 'secp521r1',
