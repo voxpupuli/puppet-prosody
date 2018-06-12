@@ -36,6 +36,12 @@ Component "<%= name %>" <% if component.include?('type') then %>"<%= component['
 <%- if @custom_options != {} -%>
 ------ Custom config options ------
 <%- @custom_options.sort.each do |option, value| -%>
+  <%- if value.is_a?(String) then -%>
+<%= option %> = "<%= value %>"
+  <%- elsif value.is_a?(Array) then -%>
+<%= option %> = { <%= value.collect { |x| "\"#{x}\"" }.join("; ") %> }
+  <%- else -%>
 <%= option %> = <%= value %>
+  <%- end -%>
 <%- end -%>
 <%- end -%>
