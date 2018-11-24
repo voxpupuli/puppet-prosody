@@ -23,6 +23,12 @@ VirtualHost "<%= @name %>"
 <%= option %> = "<%= value %>"
   <%- elsif value.is_a?(Array) then -%>
 <%= option %> = { <%= value.collect { |x| "\"#{x}\"" }.join("; ") %> }
+  <%- elsif value.is_a?(Hash) then -%>
+<%= option %> = {
+    <%- value.each do |key, value| -%>
+  <%= key %> = "<%= value %>";
+    <%- end -%>
+}
   <%- else -%>
 <%= option %> = <%= value %>
   <%- end -%>
