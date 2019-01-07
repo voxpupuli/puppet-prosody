@@ -57,11 +57,11 @@ describe 'prosody::virtualhost' do
       # This require statment is bananas
       should contain_file(@path_avail).with(
         :ensure  => 'present',
-        :require => ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.cert]', 'Class[Prosody::Package]']
+        :require => ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
       )
 
       should contain_file('/etc/prosody/certs/mockvirtualhost.key').with_source(@ssl_key)
-      should contain_file('/etc/prosody/certs/mockvirtualhost.cert').with_source(@ssl_cert)
+      should contain_file('/etc/prosody/certs/mockvirtualhost.crt').with_source(@ssl_cert)
     }
   end
 

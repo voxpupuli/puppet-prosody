@@ -18,7 +18,7 @@ define prosody::virtualhost (
   if (($ssl_key != undef) and ($ssl_cert != undef)) {
     # Copy the provided sources to prosody certs folder
     $prosody_ssl_key  = "/etc/prosody/certs/${name}.key"
-    $prosody_ssl_cert = "/etc/prosody/certs/${name}.cert"
+    $prosody_ssl_cert = "/etc/prosody/certs/${name}.crt"
 
     $file_user = pick_default($user, 'prosody')
     $file_group = pick_default($group, 'prosody')
