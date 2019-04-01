@@ -26,9 +26,14 @@ admins = {
 <% end -%>
 }
 
+<% if scope.lookupvar('prosody::user') != '' -%>
 -- User to run prosody as
 prosody_user = "<%= scope.lookupvar('prosody::user') %>"
+<% end -%>
+<% if scope.lookupvar('prosody::group') != '' -%>
+-- Group to run prosody as
 prosody_group = "<%= scope.lookupvar('prosody::group') %>"
+<% end -%>
 
 -- Which interfaces (addresses) to listen on
 interfaces = {
