@@ -1,10 +1,11 @@
 -- Prosody XMPP Server Configuration
 --
 -- Information on configuring Prosody can be found on our
--- website at http://prosody.im/doc/configure
+-- website at https://prosody.im/doc/configure
 --
 -- Tip: You can check that the syntax of this file is correct
--- when you have finished by running: luac -p prosody.cfg.lua
+-- when you have finished by running this command:
+--     prosodyctl check config
 -- If there are any errors, it will let you know what and where
 -- they are, otherwise it will keep quiet.
 --
@@ -17,7 +18,7 @@
 
 -- This is a (by default, empty) list of accounts that are admins
 -- for the server. Note that you must create the accounts separately
--- (see http://prosody.im/doc/creating_accounts for info)
+-- (see https://prosody.im/doc/creating_accounts for info)
 -- Example: admins = { "user1@example.com", "user2@example.net" }
 admins = {
 <% scope.lookupvar('prosody::admins').each do |admin| -%>
@@ -37,12 +38,12 @@ interfaces = {
 }
 
 -- Enable use of libevent for better performance under high load
--- For more information see: http://prosody.im/doc/libevent
+-- For more information see: https://prosody.im/doc/libevent
 use_libevent = <%= scope.lookupvar('prosody::use_libevent') %>;
 
 -- This is the list of modules Prosody will load on startup.
 -- It looks for mod_modulename.lua in the plugins folder, so make sure that exists too.
--- Documentation on modules can be found at: http://prosody.im/doc/modules
+-- Documentation on modules can be found at: https://prosody.im/doc/modules
 modules_enabled = {
 
   -- Base modules
@@ -80,7 +81,7 @@ modules_disabled = {
 <%- end -%>
 
 -- Disable account creation by default, for security
--- For more information see http://prosody.im/doc/creating_accounts
+-- For more information see https://prosody.im/doc/creating_accounts
 allow_registration = <%= scope.lookupvar('prosody::allow_registration') %>;
 
 -- Debian:
@@ -129,7 +130,7 @@ s2s_require_encryption = <%= scope.lookupvar('prosody::s2s_require_encryption') 
 -- This provides ideal security, but requires servers you communicate
 -- with to support encryption AND present valid, trusted certificates.
 -- NOTE: Your version of LuaSec must support certificate verification!
--- For more information see http://prosody.im/doc/s2s#security
+-- For more information see https://prosody.im/doc/s2s#security
 
 s2s_secure_auth = <%= scope.lookupvar('prosody::s2s_secure_auth') %>
 
@@ -165,7 +166,7 @@ pidfile = "<%= scope.lookupvar('prosody::pidfile') %>"
 -- use Prosody's configured data storage to store the authentication data.
 -- To allow Prosody to offer secure authentication mechanisms to clients, the
 -- default provider stores passwords in plaintext. If you do not trust your
--- server please see http://prosody.im/doc/modules/mod_auth_internal_hashed
+-- server please see https://prosody.im/doc/modules/mod_auth_internal_hashed
 -- for information about using the hashed backend.
 
 authentication = "<%= scope.lookupvar('prosody::authentication') %>"
@@ -173,7 +174,7 @@ authentication = "<%= scope.lookupvar('prosody::authentication') %>"
 -- Select the storage backend to use. By default Prosody uses flat files
 -- in its configured data directory, but it also supports more backends
 -- through modules. An "sql" backend is included by default, but requires
--- additional dependencies. See http://prosody.im/doc/storage for more info.
+-- additional dependencies. See https://prosody.im/doc/storage for more info.
 
 <%- storage = scope.lookupvar('prosody::storage')
     if storage != :undef
@@ -194,7 +195,7 @@ sql = { driver = "<%= sql['driver'] %>", database = "<%= sql ['database'] %>", u
 <%- end -%>
 
 -- Logging configuration
--- For advanced logging see http://prosody.im/doc/logging
+-- For advanced logging see https://prosody.im/doc/logging
 log = {
         <%= scope.lookupvar('prosody::log_level') -%> = "<%= scope.lookupvar('prosody::info_log') -%>"; -- Change 'info' to 'debug' for verbose logging
         error = "<%= scope.lookupvar('prosody::error_log') -%>";
@@ -206,7 +207,7 @@ log = {
 ------ Components ------
 -- You can specify components to add hosts that provide special services,
 -- like multi-user conferences, and transports.
--- For more information on components, see http://prosody.im/doc/components
+-- For more information on components, see https://prosody.im/doc/components
 
 <% scope.lookupvar('prosody::components').sort.each do |name, component| %>
 Component "<%= name %>" <% if component.include?('type') then %>"<%= component['type'] %>"<% end %>
