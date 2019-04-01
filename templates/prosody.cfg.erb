@@ -94,6 +94,7 @@ allow_registration = <%= scope.lookupvar('prosody::allow_registration') %>;
 --
 daemonize = <%= scope.lookupvar('prosody::daemonize') %>;
 
+<% if scope.lookupvar('prosody::ssl_custom_config') -%>
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
@@ -120,6 +121,7 @@ ssl = {
   certificate = "<%= ssl_cert %>";
   <%- end -%>
 }
+<% end -%>
 
 -- Force clients to use encrypted connections? This option will
 -- prevent clients from authenticating unless they are using encryption.

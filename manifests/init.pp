@@ -13,6 +13,7 @@ class prosody (
   $interfaces             = ['0.0.0.0', '::'],
   $daemonize              = true,
   $allow_registration     = false,
+  $ssl_custom_config      = true,
   $ssl_key                = undef,
   $ssl_cert               = undef,
   $ssl_protocol           = undef,
