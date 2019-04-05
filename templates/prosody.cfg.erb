@@ -163,7 +163,21 @@ s2s_secure_domains = {
 ------ Custom config options ------
 
 <% scope.lookupvar('prosody::custom_options').sort.each do |option, value| -%>
+  <%- if ( value.is_a? Array ) -%>
+<%= option %> = { "<%= value.join(", ") %>" }
+  <%- elsif ( value.is_a? Hash ) -%>
+<%= option %> = {
+    <%- value.each do | k, v | -%>
+      <%- if ( v.is_a? Array ) -%>
+         <%= k %> = { "<%= v.join('", "') %>" };
+      <%- else -%>
+         <%= k %> = "<%= v %>";
+      <%- end -%>
+    <%- end -%>
+    }
+  <%- else -%>
 <%= option %> = <%= value %>
+  <%- end -%>
 <% end -%>
 
 -- Required for init scripts and prosodyctl
