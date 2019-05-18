@@ -1,12 +1,12 @@
 # == Type: prosody::virtualhost
 define prosody::virtualhost(
-  $custom_options = {},
-  $ensure         = present,
-  $ssl_key        = undef,
-  $ssl_cert       = undef,
-  $user           = undef,
-  $group          = undef,
-  $components     = {},
+  Hash                           $custom_options = {},
+  Enum[present, absent]          $ensure         = present,
+  Optional[Stdlib::Absolutepath] $ssl_key        = undef,
+  Optional[Stdlib::Absolutepath] $ssl_cert       = undef,
+  Optional[String]               $user           = undef,
+  Optional[String]               $group          = undef,
+  Hash                           $components     = {},
 ) {
   # Check if SSL set correctly
   if (($ssl_key != undef) and ($ssl_cert == undef)) {
