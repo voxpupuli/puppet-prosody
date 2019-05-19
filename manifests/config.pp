@@ -1,3 +1,4 @@
+# == Class: prosody::config
 class prosody::config {
   file { '/etc/prosody/conf.avail':
     ensure => directory,

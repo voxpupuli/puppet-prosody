@@ -1,4 +1,5 @@
-define prosody::user (
+# == Type: prosody::user
+define prosody::user(
   $pass,
   $host = 'localhost',
 ) {

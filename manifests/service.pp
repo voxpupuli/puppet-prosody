@@ -1,3 +1,4 @@
+# == Class: prosody::service
 class prosody::service {
   if $::prosody::daemonize {
     case $::osfamily {

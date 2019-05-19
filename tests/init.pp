@@ -1,5 +1,5 @@
 node default {
-  include prosody
+  include ::prosody
 
   prosody::virtualhost {
     'puppetlabs.com' :

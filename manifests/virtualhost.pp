@@ -1,4 +1,5 @@
-define prosody::virtualhost (
+# == Type: prosody::virtualhost
+define prosody::virtualhost(
   $custom_options = {},
   $ensure         = present,
   $ssl_key        = undef,
