@@ -1,4 +1,5 @@
-class prosody (
+# == Class: prosody
+class prosody(
   $package_name           = 'prosody',
   $package_ensure         = 'present',
   $admins                 = [],

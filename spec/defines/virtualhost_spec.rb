@@ -2,6 +2,14 @@ require 'spec_helper'
 require 'erb'
 
 describe 'prosody::virtualhost' do
+  let(:pre_condition) do
+    'include ::prosody'
+  end
+  let(:facts) do
+    {
+      osfamily: 'SomeOS'
+    }
+  end
   let(:title) { 'mockvirtualhost' }
 
   before :each do
@@ -12,41 +20,41 @@ describe 'prosody::virtualhost' do
   context 'with no parameters' do
     it {
       should contain_file(@path_avail).with(
-        :ensure  => 'present',
+        ensure: 'present'
       )
     }
 
     it {
       should contain_file(@path_link).with(
-        :ensure  => 'link',
-        :target  => @path_avail,
-        :require => "File[#{@path_avail}]",
+        ensure: 'link',
+        target: @path_avail,
+        require: "File[#{@path_avail}]"
       )
     }
   end
 
   context 'with ssl_key but no ssl_cert' do
-    let(:params) { { :ssl_key => 'bananas' } }
+    let(:params) { { ssl_key: 'bananas' } }
     it {
-      expect {
+      expect do
         should contain_class('prosody')
-      }.to raise_error(Puppet::Error)
+      end.to raise_error(Puppet::Error)
     }
   end
 
   context 'with ssl_cert but no ssl_key' do
-    let(:params) { { :ssl_cert => 'bananas' } }
+    let(:params) { { ssl_cert: 'bananas' } }
     it {
-      expect {
+      expect do
         should contain_class('prosody')
-      }.to raise_error(Puppet::Error)
+      end.to raise_error(Puppet::Error)
     }
   end
 
   context 'with ssl keys and certs' do
     let(:ssl_key) { '/etc/prosody/certs/rspec-puppet.com.key' }
     let(:ssl_cert) { '/etc/prosody/certs/rspec-puppet.com.crt' }
-    let(:params) { { :ssl_key => ssl_key, :ssl_cert => ssl_cert } }
+    let(:params) { { ssl_key: ssl_key, ssl_cert: ssl_cert } }
 
     before :each do
       @ssl_key = ssl_key
@@ -56,8 +64,8 @@ describe 'prosody::virtualhost' do
     it {
       # This require statment is bananas
       should contain_file(@path_avail).with(
-        :ensure  => 'present',
-        :require => ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
+        ensure: 'present',
+        require: ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
       )
 
       should contain_file('/etc/prosody/certs/mockvirtualhost.key').with_source(@ssl_key)
@@ -66,11 +74,11 @@ describe 'prosody::virtualhost' do
   end
 
   context 'ensure => absent' do
-    let(:params) { { :ensure => 'absent' } }
+    let(:params) { { ensure: 'absent' } }
     it {
       @ensure = 'absent'
       should contain_file(@path_avail).with(
-        :ensure  => @ensure,
+        ensure: @ensure
       )
     }
 

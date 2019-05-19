@@ -1,4 +1,5 @@
-class prosody::community_modules (
+# == Class: prosody::community_modules
+class prosody::community_modules(
   $ensure   = 'present',
   $path     = '/var/lib/prosody/modules',
   $type     = 'hg',
