@@ -1,10 +1,7 @@
-# == Type: prosody::user
+# == Define: prosody::user
 define prosody::user(
-  String                    $pass,
-  Variant[
-    Pattern[/^localhost$/],
-    Stdlib::Host
-  ]                         $host = 'localhost',
+  String        $pass,
+  Prosody::Host $host = 'localhost',
 ) {
   $dir = regsubst($host, '\.', '%2e', 'G')
 

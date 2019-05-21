@@ -1,0 +1,64 @@
+---
+prosody::admins: []
+prosody::allow_registration: false
+prosody::authentication: internal_plain
+prosody::c2s_require_encryption: true
+prosody::community_modules: []
+prosody::components: {}
+prosody::custom_options: {}
+prosody::daemonize: true
+prosody::error_log: /var/log/prosody/prosody.err
+prosody::group: prosody
+prosody::info_log: /var/log/prosody/prosody.log
+prosody::interfaces:
+  - '0.0.0.0'
+  - '::'
+prosody::log_level: info
+prosody::log_sinks:
+  - syslog
+prosody::modules: []
+prosody::modules_base:
+  - admin_adhoc
+  - dialback
+  - disco
+  - pep
+  - ping
+  - posix
+  - private
+  - roster
+  - saslauth
+  - time
+  - tls
+  - uptime
+  - vcard
+  - version
+prosody::modules_disabled: []
+prosody::package_ensure: present
+prosody::package_name: prosody
+prosody::pidfile: /var/run/prosody/prosody.pid
+prosody::s2s_insecure_domains: []
+prosody::s2s_require_encryption: true
+prosody::s2s_secure_auth: true
+prosody::s2s_secure_domains: []
+prosody::ssl_ciphers: 'DH+AES:ECDH+AES:+ECDH+SHA:AES:!PSK:!SRP:!DSS:!ADH:!AECDH'
+prosody::ssl_curve: secp521r1
+prosody::ssl_custom_config: true
+prosody::ssl_dhparam: ''
+prosody::ssl_options:
+  - cipher_server_preference
+  - no_compression
+  - no_sslv2
+  - no_sslv3
+  - no_ticket
+  - single_dh_use
+  - single_ecdh_use
+prosody::storage: internal
+prosody::use_libevent: true
+prosody::user: prosody
+prosody::virtualhost_defaults: {}
+prosody::virtualhosts: {}
+
+prosody::community_modules::ensure: present
+prosody::community_modules::path: /var/lib/prosody/modules
+prosody::community_modules::source: https://hg.prosody.im/prosody-modules/
+prosody::community_modules::type: hg

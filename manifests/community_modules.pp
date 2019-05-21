@@ -1,9 +1,9 @@
 # == Class: prosody::community_modules
 class prosody::community_modules(
-  Enum[present, latest] $ensure   = present,
-  Stdlib::Absolutepath  $path     = '/var/lib/prosody/modules',
-  Enum['hg', 'git']     $type     = 'hg',
-  String                $source   = 'https://hg.prosody.im/prosody-modules/',
+  Enum[present, latest] $ensure,
+  Stdlib::Absolutepath  $path,
+  String                $source,
+  Prosody::Moduletype   $type,
   Optional[String]      $revision = undef,
 ) {
   case $type {
