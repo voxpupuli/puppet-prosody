@@ -162,22 +162,21 @@ s2s_secure_domains = {
 
 ------ Custom config options ------
 
+<%-
+def print_recursive(object)
+  case object.class
+  when Array
+    '{ ' + object.each {|v| print_recursive(v)}.join(', ') + '}'
+  when Hash
+    '{ ' + object.each {|k,v| "#{k}" + print_recursive(v) }.join('; ') + '}'
+  when String
+    object
+  end
+end
+-%>
+
 <% scope.lookupvar('prosody::custom_options').sort.each do |option, value| -%>
-  <%- if ( value.is_a? Array ) -%>
-<%= option %> = { "<%= value.join(", ") %>" }
-  <%- elsif ( value.is_a? Hash ) -%>
-<%= option %> = {
-    <%- value.each do | k, v | -%>
-      <%- if ( v.is_a? Array ) -%>
-         <%= k %> = { "<%= v.join('", "') %>" };
-      <%- else -%>
-         <%= k %> = "<%= v %>";
-      <%- end -%>
-    <%- end -%>
-    }
-  <%- else -%>
-<%= option %> = <%= value %>
-  <%- end -%>
+<%= option %> = <%= print_recursive(value) %>
 <% end -%>
 
 -- Required for init scripts and prosodyctl
