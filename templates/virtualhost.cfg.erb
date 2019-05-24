@@ -17,23 +17,22 @@ VirtualHost "<%= @name %>"
 <% end -%>
 
 <%- if @custom_options != {} -%>
+<%-
+def print_recursive(object)
+  case object.class
+  when Array
+    '{ ' + object.each {|v| print_recursive(v)}.join(', ') + '}'
+  when Hash
+    '{ ' + object.each {|k,v| "#{k} = " + print_recursive(v)}.join('; ') + '}'
+  when String
+    object
+  end
+end
+-%>
 ------ Custom config options ------
 <%- @custom_options.sort.each do |option, value| -%>
-  <%- if value.is_a?(String) then -%>
-<%= option %> = "<%= value %>"
-  <%- elsif value.is_a?(Array) then -%>
-<%= option %> = { <%= value.collect { |x| "\"#{x}\"" }.join("; ") %> }
-  <%- elsif value.is_a?(Hash) then -%>
-<%= option %> = {
-    <%- value.each do |key, value| -%>
-  <%= key %> = "<%= value %>";
-    <%- end -%>
-}
-  <%- else -%>
-<%= option %> = <%= value %>
-  <%- end -%>
-<%- end -%>
-<%- end -%>
+<%= option %> = <%= print_recursive(value) %>
+<%- end; end -%>
 
 <%- if @components != {} -%>
 ------ Components ------

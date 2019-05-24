@@ -168,7 +168,7 @@ def print_recursive(object)
   when Array
     '{ ' + object.each {|v| print_recursive(v)}.join(', ') + '}'
   when Hash
-    '{ ' + object.each {|k,v| "#{k}" + print_recursive(v) }.join('; ') + '}'
+    '{ ' + object.each {|k,v| "#{k}" + print_recursive(v)}.join('; ') + '}'
   when String
     object
   end
