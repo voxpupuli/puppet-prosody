@@ -96,10 +96,10 @@ describe 'prosody::virtualhost' do
   end
 
   context 'with deeply nested custom options' do
-    let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'baz' => 'quux' } } }
+    let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux' } } }
     it {
       should contain_file(@path_avail) \
-        .with_content(/^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$/, /^baz = "quux"$/)
+        .with_content(/^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$/, /^baz = "quux"$/, /^bar = [ "cool"; "elements" ]$/)
     }
   end
 end
