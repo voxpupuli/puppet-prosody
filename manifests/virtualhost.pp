@@ -4,6 +4,7 @@ define prosody::virtualhost(
   Enum[present, absent]          $ensure         = present,
   Optional[Stdlib::Absolutepath] $ssl_key        = undef,
   Optional[Stdlib::Absolutepath] $ssl_cert       = undef,
+  Boolean                        $ssl_copy       = true,
   Optional[String]               $user           = undef,
   Optional[String]               $group          = undef,
   Hash                           $components     = {},
@@ -16,7 +17,7 @@ define prosody::virtualhost(
     fail('The prosody::virtualhost type needs both ssl_key *and* ssl_cert set')
   }
 
-  if (($ssl_key != undef) and ($ssl_cert != undef)) {
+  if (($ssl_key != undef) and ($ssl_cert != undef) and ($ssl_copy == true)) {
     # Copy the provided sources to prosody certs folder
     $prosody_ssl_key  = "/etc/prosody/certs/${name}.key"
     $prosody_ssl_cert = "/etc/prosody/certs/${name}.crt"
@@ -41,6 +42,12 @@ define prosody::virtualhost(
 
     $config_requires = [File[$prosody_ssl_key], File[$prosody_ssl_cert], Class['::prosody::package']]
   }
+
+  elsif (($ssl_key != undef) and ($ssl_cert != undef) and ($ssl_copy == false)) {
+    $prosody_ssl_key  = $ssl_key
+    $prosody_ssl_cert = $ssl_cert
+  }
+
   else {
     $config_requires = Class['::prosody::package']
   }
