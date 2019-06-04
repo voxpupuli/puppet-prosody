@@ -16,6 +16,7 @@ prosody::interfaces:
 prosody::log_level: info
 prosody::log_sinks:
   - syslog
+prosody::log_advanced: {}
 prosody::modules: []
 prosody::modules_base:
   - admin_adhoc
