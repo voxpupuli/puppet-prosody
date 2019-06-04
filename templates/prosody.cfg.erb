@@ -224,6 +224,9 @@ log = {
 <% scope.lookupvar('prosody::log_sinks').each do |sink|  -%>
         "*<%= sink %>";
 <% end -%>
+<% scope.lookupvar('prosody::log_advanced').each do |level, destination|  -%>
+    { levels = { <%= level %> }; to = <%= destination %>; };
+<% end -%>
 }
 
 ------ Components ------
