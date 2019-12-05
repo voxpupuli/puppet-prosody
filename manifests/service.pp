@@ -9,6 +9,13 @@ class prosody::service {
           require => Class[prosody::config],
         }
       }
+      'Debian': {
+        service { 'prosody':
+          ensure  => running,
+          enable  => true,
+          require => Class[prosody::config],
+        }
+      }
       default: {
         service { 'prosody' :
           ensure    => running,
