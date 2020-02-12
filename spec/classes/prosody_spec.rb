@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'prosody' do
   let(:facts) do
-    { osfamily: 'SomeOS' }
+    { os: { family: 'SomeOS', name: 'SomeOS' } }
   end
 
   context 'on every platform' do

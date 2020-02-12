@@ -1,7 +1,7 @@
 # == Class: prosody::service
 class prosody::service {
-  if $::prosody::daemonize {
-    case $::osfamily {
+  if $prosody::daemonize {
+    case $facts['os']['family'] {
       'OpenBSD': {
         service { 'prosody':
           ensure  => running,

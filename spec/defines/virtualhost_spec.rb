@@ -6,9 +6,7 @@ describe 'prosody::virtualhost' do
     'include ::prosody'
   end
   let(:facts) do
-    {
-      osfamily: 'SomeOS'
-    }
+    { os: { family: 'SomeOS', name: 'SomeOS' } }
   end
   let(:title) { 'mockvirtualhost' }
 
