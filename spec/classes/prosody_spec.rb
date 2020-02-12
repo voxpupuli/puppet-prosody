@@ -4,18 +4,20 @@ describe 'prosody' do
   let(:facts) do
     { osfamily: 'SomeOS' }
   end
-  context 'on every platform' do
-    it { should contain_class 'prosody::package' }
-    it { should contain_class 'prosody::config' }
-    it { should contain_class 'prosody::service' }
 
-    it { should contain_package('prosody').with(ensure: 'present') }
+  context 'on every platform' do
+    it { is_expected.to contain_class 'prosody::package' }
+    it { is_expected.to contain_class 'prosody::config' }
+    it { is_expected.to contain_class 'prosody::service' }
+
+    it { is_expected.to contain_package('prosody').with(ensure: 'present') }
   end
 
   context 'with daemonize => true' do
     let(:params) { { daemonize: true } }
+
     it {
-      should contain_service('prosody').with(
+      is_expected.to contain_service('prosody').with(
         ensure: 'running'
       )
     }
@@ -23,8 +25,9 @@ describe 'prosody' do
 
   context 'with daemonize => false' do
     let(:params) { { daemonize: false } }
+
     it {
-      should_not contain_service('prosody').with(
+      is_expected.not_to contain_service('prosody').with(
         ensure: 'running'
       )
     }
@@ -32,17 +35,19 @@ describe 'prosody' do
 
   context 'with custom options' do
     let(:params) { { custom_options: { 'foo' => 'bar', 'baz' => 'quux' } } }
+
     it {
-      should contain_file('/etc/prosody/prosody.cfg.lua') \
-        .with_content(/^foo = "bar"$/, /^baz = "quux"$/)
+      is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
+        with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$})
     }
   end
 
   context 'with deeply nested custom options' do
     let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux' } } }
+
     it {
-      should contain_file('/etc/prosody/prosody.cfg.lua') \
-        .with_content(/^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$/, /^baz = "quux"$/, /^bar = [ "cool"; "elements" ]$/)
+      is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
+        with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "cool"; "elements" ]$})
     }
   end
 end
