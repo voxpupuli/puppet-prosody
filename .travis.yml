@@ -38,7 +38,7 @@ deploy:
   provider: puppetforge
   user: puppet
   password:
-    secure: ""
+    secure: "nM2z3RPq3q9asklcpjgz5ASCe84gCVqpl57C2fbWlK7Pl8EMyjbCeWgAuS/PMabu/cYSliqauXyoxkqBgM7qa0hGWb+UbjMpsVi61O+nTEBQF7k1FlDH5/ApUpT1H0Vzbfoh6fxfyvI433jEF5B2kfL+OR5tXOX7u89ePFDuYqU="
   on:
     tags: true
     # all_branches is required to use tags
