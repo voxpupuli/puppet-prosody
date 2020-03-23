@@ -41,17 +41,19 @@ class prosody(
   Optional[String]                        $ssl_protocol = undef,
 ) {
   if ($community_modules != []) {
-    class { '::prosody::community_modules':
+    class { 'prosody::community_modules':
       require => Class['::prosody::package'],
       before  => Class['::prosody::config'],
     }
   }
 
-  anchor { 'prosody::begin': }
-  -> class { '::prosody::package': }
-  -> class { '::prosody::config': }
-  -> class { '::prosody::service': }
-  -> anchor { '::prosody::end': }
+  contain 'prosody::package'
+  contain 'prosody::config'
+  contain 'prosody::service'
+
+  Class['prosody::package']
+  -> Class['prosody::config']
+  ~> Class['prosody::service']
 
   # create virtualhost resources via hiera
   create_resources('prosody::virtualhost', $virtualhosts, $virtualhost_defaults)
