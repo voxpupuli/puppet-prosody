@@ -22,6 +22,20 @@ node myserver {
     group             => 'prosody',
     community_modules => ['mod_auth_ldap'],
     authentication    => 'ldap',
+    components => {
+      'conference'        => {
+        'name' => 'conf.example.org',
+        'type' =>'muc',
+      },
+      'bridge'            => {
+        'name'   => 'bridge.example.org',
+        'secret' =>  'mysupersecret',
+      },
+      'focus'             => {
+        'name'   => 'focus.example.org',
+        'secret' => 'anothersupersecret',
+      }
+    },
     custom_options    => {
                             'ldap_base'     => 'OU="accounts",DC="mydomain",DC="com"',
                             'ldap_server'   => 'ldapserver1:636 ldapserver2:636',
