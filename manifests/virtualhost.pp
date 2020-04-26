@@ -8,6 +8,7 @@ define prosody::virtualhost(
   Optional[String]               $user           = undef,
   Optional[String]               $group          = undef,
   Hash                           $components     = {},
+  Optional[Array[String]]        $disco_items    = undef,
 ) {
   # Check if SSL set correctly
   if (($ssl_key != undef) and ($ssl_cert == undef)) {

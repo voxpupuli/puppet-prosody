@@ -54,3 +54,10 @@ Component "<%= name %>" <% if component.include?('type') then %>"<%= component['
   <%- end -%>
 <% end -%>
 <% end -%>
+<%- if @disco_items != nil -%>
+disco_items = {
+<%- @disco_items.each do |item| -%>
+  { "<%= item %>" };
+<% end -%>
+}
+<% end -%>

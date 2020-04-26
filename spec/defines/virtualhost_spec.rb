@@ -95,4 +95,13 @@ describe 'prosody::virtualhost' do
         with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "cool"; "elements" ]$})
     }
   end
+
+  context 'with disco items' do
+    let(:params) { { disco_items: [ 'foo', 'bar' ] } }
+
+    it {
+      is_expected.to contain_file(path_avail). \
+        with_content(%r{^disco_items = \{\n  \{ \"foo\" \}\;\n  \{ \"bar\" \}\;\n\}})
+    }
+  end
 end
