@@ -97,7 +97,7 @@ describe 'prosody::virtualhost' do
   end
 
   context 'with disco items' do
-    let(:params) { { disco_items: [ 'foo', 'bar' ] } }
+    let(:params) { { disco_items: %w[foo bar] } }
 
     it {
       is_expected.to contain_file(path_avail). \
