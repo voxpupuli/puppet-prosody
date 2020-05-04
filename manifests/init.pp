@@ -35,7 +35,7 @@ class prosody(
   String                                  $user,
   Hash                                    $virtualhost_defaults,
   Hash                                    $virtualhosts,
-  Optional[Array[String]]                 $disco_items  = undef,
+  Array[String[1]]                        $disco_items  = [],
   Optional[Hash]                          $sql          = undef,
   Optional[Stdlib::Absolutepath]          $ssl_cert     = undef,
   Optional[Stdlib::Absolutepath]          $ssl_key      = undef,
