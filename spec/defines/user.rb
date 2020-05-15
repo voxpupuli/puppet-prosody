@@ -21,7 +21,9 @@ describe 'prosody::user' do
 return {
   [\"password\"] = \"pass123\";
 };',
-            ensure: 'present'
+            ensure: 'present',
+            recurse: false,
+            purge: false
           )
         }
       end
@@ -48,6 +50,23 @@ return {
   [\"password\"] = \"pass123\";
 };',
             ensure: 'present'
+          )
+        }
+      end
+      context 'with purging enabled' do
+        let(:params) { { name: 'bob', pass: 'pass123', purge: true } }
+
+        it {
+          is_expected.to contain_file('/var/lib/prosodoy/foo%2dbar%2ecom/accounts/bob.dat').with(
+            ensure: 'present'
+          )
+        }
+
+        it {
+          is_expected.to contain_file('/var/lib/prosodoy/foo%2dbar%2ecom/accounts').with(
+            ensure: 'present',
+            purge: true,
+            recurse: true
           )
         }
       end

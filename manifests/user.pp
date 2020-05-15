@@ -2,6 +2,7 @@
 define prosody::user(
   String        $pass,
   Prosody::Host $host = 'localhost',
+  Boolean       $purge = false,
 ) {
   $_dir1 = regsubst($host, '\.', '%2e', 'G')
   $dir = regsubst($_dir1, '-', '%2d', 'G')
@@ -19,6 +20,8 @@ define prosody::user(
     ensure  => 'directory',
     owner   => 'prosody',
     group   => 'prosody',
+    recurse => $purge,
+    purge   => $purge,
     require => File["/var/lib/prosody/${dir}"],
   })
 
