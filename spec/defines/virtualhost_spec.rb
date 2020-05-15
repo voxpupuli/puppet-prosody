@@ -5,103 +5,109 @@ describe 'prosody::virtualhost' do
   let(:pre_condition) do
     'include ::prosody'
   end
-  let(:facts) do
-    { os: { family: 'SomeOS', name: 'SomeOS' } }
-  end
-  let(:title) { 'mockvirtualhost' }
 
-  let(:path_avail) { "/etc/prosody/conf.avail/#{title}.cfg.lua" }
-  let(:path_link) { "/etc/prosody/conf.d/#{title}.cfg.lua" }
+  on_supported_os.each do |os, os_facts|
+    context "on os #{os}" do
+      let(:facts) do
+        os_facts
+      end
 
-  context 'with no parameters' do
-    it {
-      is_expected.to contain_file(path_avail).with(
-        ensure: 'present'
-      )
-    }
+      let(:title) { 'mockvirtualhost' }
 
-    it {
-      is_expected.to contain_file(path_link).with(
-        ensure: 'link',
-        target: path_avail,
-        require: "File[#{path_avail}]"
-      )
-    }
-  end
+      let(:path_avail) { "/etc/prosody/conf.avail/#{title}.cfg.lua" }
+      let(:path_link) { "/etc/prosody/conf.d/#{title}.cfg.lua" }
 
-  context 'with ssl_key but no ssl_cert' do
-    let(:params) { { ssl_key: 'bananas' } }
+      context 'with no parameters' do
+        it {
+          is_expected.to contain_file(path_avail).with(
+            ensure: 'present'
+          )
+        }
 
-    it {
-      expect do
-        is_expected.to contain_class('prosody')
-      end.to raise_error(Puppet::Error)
-    }
-  end
+        it {
+          is_expected.to contain_file(path_link).with(
+            ensure: 'link',
+            target: path_avail,
+            require: "File[#{path_avail}]"
+          )
+        }
+      end
 
-  context 'with ssl_cert but no ssl_key' do
-    let(:params) { { ssl_cert: 'bananas' } }
+      context 'with ssl_key but no ssl_cert' do
+        let(:params) { { ssl_key: 'bananas' } }
 
-    it {
-      expect do
-        is_expected.to contain_class('prosody')
-      end.to raise_error(Puppet::Error)
-    }
-  end
+        it {
+          expect do
+            is_expected.to contain_class('prosody')
+          end.to raise_error(Puppet::Error)
+        }
+      end
 
-  context 'with ssl keys and certs' do
-    let(:ssl_key) { '/etc/prosody/certs/rspec-puppet.com.key' }
-    let(:ssl_cert) { '/etc/prosody/certs/rspec-puppet.com.crt' }
-    let(:params) { { ssl_key: ssl_key, ssl_cert: ssl_cert } }
+      context 'with ssl_cert but no ssl_key' do
+        let(:params) { { ssl_cert: 'bananas' } }
 
-    it {
-      # This require statment is bananas
-      is_expected.to contain_file(path_avail).with(
-        ensure: 'present',
-        require: ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
-      )
+        it {
+          expect do
+            is_expected.to contain_class('prosody')
+          end.to raise_error(Puppet::Error)
+        }
+      end
 
-      is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.key').with_source(ssl_key)
-      is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.crt').with_source(ssl_cert)
-    }
-  end
+      context 'with ssl keys and certs' do
+        let(:ssl_key) { '/etc/prosody/certs/rspec-puppet.com.key' }
+        let(:ssl_cert) { '/etc/prosody/certs/rspec-puppet.com.crt' }
+        let(:params) { { ssl_key: ssl_key, ssl_cert: ssl_cert } }
 
-  context 'ensure => absent' do
-    let(:params) { { ensure: 'absent' } }
+        it {
+          # This require statment is bananas
+          is_expected.to contain_file(path_avail).with(
+            ensure: 'present',
+            require: ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
+          )
 
-    it {
-      is_expected.to contain_file(path_avail).with_ensure('absent')
-    }
+          is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.key').with_source(ssl_key)
+          is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.crt').with_source(ssl_cert)
+        }
+      end
 
-    it {
-      is_expected.to contain_file(path_link).with_ensure('absent')
-    }
-  end
+      context 'ensure => absent' do
+        let(:params) { { ensure: 'absent' } }
 
-  context 'with custom options' do
-    let(:params) { { custom_options: { 'foo' => 'bar', 'baz' => 'quux' } } }
+        it {
+          is_expected.to contain_file(path_avail).with_ensure('absent')
+        }
 
-    it {
-      is_expected.to contain_file(path_avail). \
-        with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$})
-    }
-  end
+        it {
+          is_expected.to contain_file(path_link).with_ensure('absent')
+        }
+      end
 
-  context 'with deeply nested custom options' do
-    let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux' } } }
+      context 'with custom options' do
+        let(:params) { { custom_options: { 'foo' => 'bar', 'baz' => 'quux' } } }
 
-    it {
-      is_expected.to contain_file(path_avail). \
-        with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "cool"; "elements" ]$})
-    }
-  end
+        it {
+          is_expected.to contain_file(path_avail). \
+            with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$})
+        }
+      end
 
-  context 'with disco items' do
-    let(:params) { { disco_items: %w[foo bar] } }
+      context 'with deeply nested custom options' do
+        let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux' } } }
 
-    it {
-      is_expected.to contain_file(path_avail). \
-        with_content(%r{^disco_items = \{\n  \{ \"foo\" \}\;\n  \{ \"bar\" \}\;\n\}})
-    }
+        it {
+          is_expected.to contain_file(path_avail). \
+            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "cool"; "elements" ]$})
+        }
+      end
+
+      context 'with disco items' do
+        let(:params) { { disco_items: %w[foo bar] } }
+
+        it {
+          is_expected.to contain_file(path_avail). \
+            with_content(%r{^disco_items = \{\n  \{ \"foo\" \}\;\n  \{ \"bar\" \}\;\n\}})
+        }
+      end
+    end
   end
 end
