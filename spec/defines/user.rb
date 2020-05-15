@@ -38,6 +38,19 @@ return {
           )
         }
       end
+      context 'with complex username' do
+        let(:params) { { name: 'bob.bar-foo', pass: 'pass123' } }
+
+        it {
+          is_expected.to contain_file('/var/lib/prosodoy/localhost/accounts/bob%2ebar%2dfoo.dat').with(
+            content: '
+return {
+  [\"password\"] = \"pass123\";
+};',
+            ensure: 'present'
+          )
+        }
+      end
     end
   end
 end
