@@ -7,6 +7,17 @@
   "source": "https://github.com/mayflower/puppet-prosody",
   "issues_url": "https://github.com/mayflower/puppet-prosody/issues",
   "description": "This module supports most configuration options and installing community modules",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04",
+        "18.04",
+        "20.04"
+      ]
+    }
+  ],
+
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
