@@ -1,5 +1,5 @@
 # == Class: prosody
-class prosody(
+class prosody (
   Array[String]                           $admins,
   Boolean                                 $allow_registration,
   Prosody::Authentication                 $authentication,

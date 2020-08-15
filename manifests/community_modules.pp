@@ -1,5 +1,5 @@
 # == Class: prosody::community_modules
-class prosody::community_modules(
+class prosody::community_modules (
   Enum[present, latest] $ensure,
   Stdlib::Absolutepath  $path,
   String                $source,

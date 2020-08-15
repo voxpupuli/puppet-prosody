@@ -1,5 +1,5 @@
 # == Type: prosody::virtualhost
-define prosody::virtualhost(
+define prosody::virtualhost (
   Hash                           $custom_options = {},
   Enum[present, absent]          $ensure         = present,
   Optional[Stdlib::Absolutepath] $ssl_key        = undef,
@@ -56,10 +56,10 @@ define prosody::virtualhost(
   $conf_avail_fn = "/etc/prosody/conf.avail/${name}.cfg.lua"
 
   file { $conf_avail_fn:
-      ensure  => $ensure,
-      require => $config_requires,
-      content => template('prosody/virtualhost.cfg.erb'),
-      notify  => Class['::prosody::service'],
+    ensure  => $ensure,
+    require => $config_requires,
+    content => template('prosody/virtualhost.cfg.erb'),
+    notify  => Class['::prosody::service'],
   }
 
   $cfg_ensure = $ensure ? {
