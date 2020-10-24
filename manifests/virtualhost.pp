@@ -41,7 +41,7 @@ define prosody::virtualhost (
         group  => $file_group;
     }
 
-    $config_requires = [File[$prosody_ssl_key], File[$prosody_ssl_cert], Class['::prosody::package']]
+    $config_requires = [File[$prosody_ssl_key], File[$prosody_ssl_cert], Class['prosody::package']]
   }
 
   elsif (($ssl_key != undef) and ($ssl_cert != undef) and ($ssl_copy == false)) {
@@ -50,7 +50,7 @@ define prosody::virtualhost (
   }
 
   else {
-    $config_requires = Class['::prosody::package']
+    $config_requires = Class['prosody::package']
   }
 
   $conf_avail_fn = "/etc/prosody/conf.avail/${name}.cfg.lua"
@@ -59,7 +59,7 @@ define prosody::virtualhost (
     ensure  => $ensure,
     require => $config_requires,
     content => template('prosody/virtualhost.cfg.erb'),
-    notify  => Class['::prosody::service'],
+    notify  => Class['prosody::service'],
   }
 
   $cfg_ensure = $ensure ? {
@@ -70,7 +70,7 @@ define prosody::virtualhost (
   file { "/etc/prosody/conf.d/${name}.cfg.lua":
     ensure  => $cfg_ensure,
     target  => $conf_avail_fn,
-    notify  => Class['::prosody::service'],
+    notify  => Class['prosody::service'],
     require => File[$conf_avail_fn];
   }
 }
