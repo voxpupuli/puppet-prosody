@@ -43,8 +43,8 @@ class prosody (
 ) {
   if ($community_modules != []) {
     class { 'prosody::community_modules':
-      require => Class['::prosody::package'],
-      before  => Class['::prosody::config'],
+      require => Class['prosody::package'],
+      before  => Class['prosody::config'],
     }
   }
 
