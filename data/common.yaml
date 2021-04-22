@@ -36,6 +36,8 @@ prosody::modules_base:
 prosody::modules_disabled: []
 prosody::package_ensure: present
 prosody::package_name: prosody
+prosody::manage_repository: false
+prosody::repo_key: puppet:///modules/prosody/prosody.gpg
 prosody::pidfile: /var/run/prosody/prosody.pid
 prosody::s2s_insecure_domains: []
 prosody::s2s_require_encryption: true
