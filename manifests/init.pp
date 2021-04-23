@@ -20,6 +20,8 @@ class prosody (
   Array[String]                           $modules_disabled,
   Prosody::Packageensure                  $package_ensure,
   String                                  $package_name,
+  Boolean                                 $manage_repository,
+  String                                  $repo_key,
   Stdlib::Absolutepath                    $pidfile,
   Array[Stdlib::Fqdn]                     $s2s_insecure_domains,
   Boolean                                 $s2s_require_encryption,
