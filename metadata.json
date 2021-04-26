@@ -1,6 +1,6 @@
 {
   "name": "puppet-prosody",
-  "version": "1.0.0",
+  "version": "1.0.1-rc0",
   "author": "Vox Pupuli",
   "summary": "Simple Puppet module for managing the Prosody Jabber/XMPP server",
   "license": "Apache-2.0",
@@ -17,7 +17,6 @@
       ]
     }
   ],
-
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
