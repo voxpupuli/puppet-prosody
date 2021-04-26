@@ -1,11 +1,11 @@
 {
-  "name": "mayflower-prosody",
+  "name": "puppet-prosody",
   "version": "0.4.1",
-  "author": "Franz Pletz",
+  "author": "Vox Pupuli",
   "summary": "Simple Puppet module for managing the Prosody Jabber/XMPP server",
   "license": "Apache-2.0",
-  "source": "https://github.com/mayflower/puppet-prosody",
-  "issues_url": "https://github.com/mayflower/puppet-prosody/issues",
+  "source": "https://github.com/voxpupuli/puppet-prosody",
+  "issues_url": "https://github.com/voxpupuli/puppet-prosody/issues",
   "description": "This module supports most configuration options and installing community modules",
   "operatingsystem_support": [
     {
@@ -21,17 +21,17 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.25.0"
+      "version_requirement": ">= 4.25.0 < 8.0.0"
     },
     {
       "name": "puppetlabs/vcsrepo",
-      "version_requirement": ">= 1.0.0 < 4.0.0"
+      "version_requirement": ">= 1.0.0 < 5.0.0"
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.5.10 < 7"
+      "version_requirement": ">= 6.1.0 < 8"
     }
   ]
 }
