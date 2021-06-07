@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [UNRELEASED]
+
+**Fixed bugs:**
+
+- Fixed authentication enumeration issue [\#75](https://github.com/voxpupuli/puppet-prosody/issues/75)
+
 ## [v1.0.0](https://github.com/voxpupuli/puppet-prosody/tree/v1.0.0) (2021-04-26)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-prosody/compare/0.4.0...v1.0.0)
