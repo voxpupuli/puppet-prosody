@@ -1,14 +1,15 @@
 # == Type: prosody::virtualhost
 define prosody::virtualhost (
-  Hash                           $custom_options = {},
-  Enum[present, absent]          $ensure         = present,
-  Optional[Stdlib::Absolutepath] $ssl_key        = undef,
-  Optional[Stdlib::Absolutepath] $ssl_cert       = undef,
-  Boolean                        $ssl_copy       = true,
-  Optional[String]               $user           = undef,
-  Optional[String]               $group          = undef,
-  Hash                           $components     = {},
-  Array[String[1]]               $disco_items    = [],
+  Hash                           $custom_options   = {},
+  Enum[present, absent]          $ensure           = present,
+  Optional[Stdlib::Absolutepath] $ssl_key          = undef,
+  Optional[Stdlib::Absolutepath] $ssl_cert         = undef,
+  Boolean                        $ssl_copy         = true,
+  Optional[String]               $user             = undef,
+  Optional[String]               $group            = undef,
+  Hash                           $components       = {},
+  Array[String[1]]               $disco_items      = [],
+  Stdlib::Absolutepath           $config_directory = lookup('prosody::config::config_directory'),
 ) {
   # Check if SSL set correctly
   if (($ssl_key != undef) and ($ssl_cert == undef)) {
@@ -20,8 +21,8 @@ define prosody::virtualhost (
 
   if (($ssl_key != undef) and ($ssl_cert != undef) and ($ssl_copy == true)) {
     # Copy the provided sources to prosody certs folder
-    $prosody_ssl_key  = "/etc/prosody/certs/${name}.key"
-    $prosody_ssl_cert = "/etc/prosody/certs/${name}.crt"
+    $prosody_ssl_key  = "${config_directory}/certs/${name}.key"
+    $prosody_ssl_cert = "${config_directory}/certs/${name}.crt"
 
     $file_user = pick_default($user, 'prosody')
     $file_group = pick_default($group, 'prosody')
@@ -53,7 +54,7 @@ define prosody::virtualhost (
     $config_requires = Class['prosody::package']
   }
 
-  $conf_avail_fn = "/etc/prosody/conf.avail/${name}.cfg.lua"
+  $conf_avail_fn = "${config_directory}/conf.avail/${name}.cfg.lua"
 
   file { $conf_avail_fn:
     ensure  => $ensure,
@@ -67,7 +68,7 @@ define prosody::virtualhost (
     'absent'  => absent,
   }
 
-  file { "/etc/prosody/conf.d/${name}.cfg.lua":
+  file { "${config_directory}/conf.d/${name}.cfg.lua":
     ensure  => $cfg_ensure,
     target  => $conf_avail_fn,
     notify  => Class['prosody::service'],

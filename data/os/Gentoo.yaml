@@ -1,0 +1,8 @@
+---
+prosody::error_log: /var/log/jabber/prosody.err
+prosody::group: jabber
+prosody::info_log: /var/log/jabber/prosody.log
+prosody::pidfile: /run/jabber/prosody.pid
+prosody::user: jabber
+
+prosody::config::config_directory: '/etc/jabber'
