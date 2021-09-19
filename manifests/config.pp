@@ -1,7 +1,7 @@
 # == Class: prosody::config
-class prosody::config(
+class prosody::config (
   Stdlib::Absolutepath  $config_directory,
-){
+) {
   file { "${config_directory}/conf.avail":
     ensure => directory,
   }

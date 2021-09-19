@@ -17,14 +17,14 @@ class prosody::community_modules (
 
   ensure_packages($_packages)
   case $type {
-    'portage': {}
+    'os': {}
     default:   {
       vcsrepo { $path:
         ensure   => $ensure,
         provider => $type,
         source   => $source,
         revision => $revision,
-        require  => Package[ $_packages ],
+        require  => Package[$_packages],
       }
     }
   }
