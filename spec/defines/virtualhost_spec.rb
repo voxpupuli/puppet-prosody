@@ -34,7 +34,7 @@ describe 'prosody::virtualhost' do
       end
 
       context 'without ssl_key nor ssl_cert' do
-        it { is_expected.not_to contain_file(path_avail).with(content: /^  ssl = {$/) }
+        it { is_expected.not_to contain_file(path_avail).with(content: %r[^  ssl = {$]) }
       end
 
       context 'with ssl_key but no ssl_cert' do
