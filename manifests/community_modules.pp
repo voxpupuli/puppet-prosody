@@ -1,16 +1,18 @@
-# == Class: prosody::community_modules
+# @summary Manage VCS
+#
 class prosody::community_modules (
   Enum[present, latest] $ensure,
-  Stdlib::Absolutepath  $path,
-  String                $source,
-  Prosody::Moduletype   $type,
-  Optional[String]      $revision = undef,
+  Stdlib::Absolutepath $path,
+  String $source,
+  Enum['hg', 'git'] $type,
+  Optional[String] $revision = undef,
 ) {
-  case $type {
-    'hg':    { $_packages = ['mercurial'] }
-    'git':   { $_packages = ['git'] }
-    default: { $_packages = [] }
+  if $type == 'hg' {
+    $_packages = ['mercurial']
+  } elsif $type == 'git' {
+    $_packages = ['git']
   }
+
   ensure_packages($_packages)
   -> vcsrepo { $path:
     ensure   => $ensure,
