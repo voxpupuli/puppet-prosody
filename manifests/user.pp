@@ -1,8 +1,9 @@
-# == Define: prosody::user
+# @summary Manage prosody users
+#
 define prosody::user (
-  String        $pass,
-  Prosody::Host $host = 'localhost',
-  Boolean       $purge = false,
+  String $pass,
+  Variant[Pattern[/^localhost $/], Stdlib::Host] $host = 'localhost', # Stdlib::Host does not match "localhost"
+  Boolean $purge = false,
 ) {
   $_dir1 = regsubst($host, '\.', '%2e', 'G')
   $dir = regsubst($_dir1, '-', '%2d', 'G')
