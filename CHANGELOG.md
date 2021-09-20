@@ -8,7 +8,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Fixed type issue in virtualhost template [\#73](https://github.com/voxpupuli/puppet-prosody/issues/73)
+- Fixed authentication enumeration issue [\#75](https://github.com/voxpupuli/puppet-prosody/issues/75)
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-prosody/tree/v1.0.0) (2021-04-26)
 
@@ -26,7 +26,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Fix user creation if domain contains a dash [\#61](https://github.com/voxpupuli/puppet-prosody/pull/61) ([Bluewind](https://github.com/Bluewind))
+- Fix user creation if domain contains a dash [\#61](https://github.com/voxpupuli/puppet-prosdy/pull/61) ([Bluewind](https://github.com/Bluewind))
 
 **Closed issues:**
 
