@@ -15,6 +15,13 @@
         "18.04",
         "20.04"
       ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "10",
+        "11"
+      ]
     }
   ],
   "dependencies": [
