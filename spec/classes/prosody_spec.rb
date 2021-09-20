@@ -13,6 +13,8 @@ describe 'prosody' do
         it { is_expected.to contain_class 'prosody::service' }
 
         it { is_expected.to contain_package('prosody').with(ensure: 'present') }
+        it { is_expected.to contain_file('/etc/prosody/conf.avail').with(ensure: 'directory') }
+        it { is_expected.to contain_file('/etc/prosody/conf.d').with(ensure: 'directory') }
       end
 
       context 'with daemonize => true' do
