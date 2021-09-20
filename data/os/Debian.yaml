@@ -1,0 +1,41 @@
+---
+# defaults for Debian
+
+prosody::daemonize: false
+prosody::pidfile: '/run/prosody/prosody.pid'
+prosody::s2s_secure_auth: false
+prosody::authentication: 'internal_hashed'
+prosody::ssl_custom_config: false
+prosody::custom_options:
+  limits:
+    c2s:
+      rate: "10kb/s"
+    s2sin:
+      rate: "30kb/s"
+  certificates: "certs"
+  archive_expires_after: "1w"
+
+prosody::log_sinks: []
+prosody::log_advanced:
+  error: 'syslog'
+
+prosody::modules_base:
+  - admin_adhoc
+  - dialback
+  - disco
+  - pep
+  - ping
+  - posix
+  - private
+  - roster
+  - saslauth
+  - time
+  - tls
+  - vcard4
+  - uptime
+  - version
+  - carbons
+  - blocklist
+  - vcard_legacy
+  - limits
+  - register

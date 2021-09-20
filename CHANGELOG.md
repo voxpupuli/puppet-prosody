@@ -26,7 +26,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Fix user creation if domain contains a dash [\#61](https://github.com/voxpupuli/puppet-prosody/pull/61) ([Bluewind](https://github.com/Bluewind))
+- Fix user creation if domain contains a dash [\#61](https://github.com/voxpupuli/puppet-prosdy/pull/61) ([Bluewind](https://github.com/Bluewind))
 
 **Closed issues:**
 

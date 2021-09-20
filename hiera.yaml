@@ -1,5 +1,11 @@
 ---
 version: 5
 hierarchy:
+  - name: "osname/major release"
+    paths:
+      - "os/%{facts.os.name}/%{facts.os.release.major}.yaml"
+  - name: "osname"
+    paths:
+      - "os/%{facts.os.name}.yaml"
   - name: common
     path: common.yaml
