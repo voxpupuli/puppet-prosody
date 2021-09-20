@@ -33,24 +33,20 @@ describe 'prosody::virtualhost' do
         }
       end
 
-      context 'with ssl_key but no ssl_cert' do
-        let(:params) { { ssl_key: 'bananas' } }
+      context 'without ssl_key nor ssl_cert' do
+        it { is_expected.not_to contain_file(path_avail).with(content: %r[^  ssl = {$]) }
+      end
 
-        it {
-          expect do
-            is_expected.to contain_class('prosody')
-          end.to raise_error(Puppet::Error)
-        }
+      context 'with ssl_key but no ssl_cert' do
+        let(:params) { { ssl_key: '/etc/prosody/certs/rspec-puppet.com.key' } }
+
+        it { is_expected.to compile.and_raise_error(%r{The prosody::virtualhost type needs both ssl_key \*and\* ssl_cert set}) }
       end
 
       context 'with ssl_cert but no ssl_key' do
-        let(:params) { { ssl_cert: 'bananas' } }
+        let(:params) { { ssl_cert: '/etc/prosody/certs/rspec-puppet.com.crt' } }
 
-        it {
-          expect do
-            is_expected.to contain_class('prosody')
-          end.to raise_error(Puppet::Error)
-        }
+        it { is_expected.to compile.and_raise_error(%r{The prosody::virtualhost type needs both ssl_key \*and\* ssl_cert set}) }
       end
 
       context 'with ssl keys and certs' do
