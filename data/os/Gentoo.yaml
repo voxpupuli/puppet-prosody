@@ -5,7 +5,7 @@ prosody::info_log: /var/log/jabber/prosody.log
 prosody::pidfile: /run/jabber/prosody.pid
 prosody::user: jabber
 
-prosody::config::config_directory: '/etc/jabber'
+prosody::config_directory: '/etc/jabber'
 
 prosody::community_modules::ensure: present
 prosody::community_modules::path: /usr/lib64/prosody/community-modules
