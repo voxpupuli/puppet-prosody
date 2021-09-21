@@ -96,6 +96,18 @@ describe 'prosody::virtualhost' do
         }
       end
 
+      context 'with deeply nested component options' do
+        let(:params) { { components: { 'comp1' => { 'type' => 'muc', 'options' => { 'bo' => true, 'arr' => %w[one two], 'str' => 'string' } } } } }
+
+        it {
+          is_expected.to contain_file(path_avail). \
+            with_content(%r{^Component "comp1" "muc"$}). \
+            with_content(%r{^  bo = true;$}). \
+            with_content(%r{^  arr = { "one"; "two" };$}).\
+            with_content(%r{^  str = "string";$})
+        }
+      end
+
       context 'with disco items' do
         let(:params) { { disco_items: %w[foo bar] } }
 
