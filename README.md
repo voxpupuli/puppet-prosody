@@ -24,8 +24,13 @@ node myserver {
     authentication    => 'ldap',
     components => {
       'conference'        => {
-        'name' => 'conf.example.org',
-        'type' =>'muc',
+        'name'   => 'conf.example.org',
+        'type'   =>'muc',
+        'options => {
+          'modules_enabled' => [
+            'muc_mam',
+            'vcard_muc',
+          ],
       },
       'bridge'            => {
         'name'   => 'bridge.example.org',
