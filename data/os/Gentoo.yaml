@@ -7,6 +7,8 @@ prosody::user: jabber
 
 prosody::config_directory: '/etc/jabber'
 
+prosody::community_package_name: 'net-im/prosody-modules'
+
 prosody::community_modules::ensure: present
 prosody::community_modules::path: /usr/lib64/prosody/community-modules
 prosody::community_modules::type: os

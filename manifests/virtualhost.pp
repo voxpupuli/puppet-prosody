@@ -18,6 +18,8 @@ define prosody::virtualhost (
     fail('The prosody::virtualhost type needs both ssl_key *and* ssl_cert set')
   }
 
+  include prosody
+
   if (($ssl_key != undef) and ($ssl_cert != undef) and ($ssl_copy == true)) {
     # Copy the provided sources to prosody certs folder
     $prosody_ssl_key  = "${prosody::config_directory}/certs/${name}.key"

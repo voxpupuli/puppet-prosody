@@ -7,25 +7,26 @@ class prosody::community_modules (
   Enum['hg', 'git', 'os'] $type,
   Optional[String] $revision = undef,
 ) {
+  include prosody
+
   if $type == 'hg' {
     $_packages = ['mercurial']
   } elsif $type == 'git' {
     $_packages = ['git']
   } elsif $type == 'os' {
-    $_packages = ['net-im/prosody-modules']
+    package { $prosody::community_package_name:
+      ensure => present,
+    }
   }
 
-  ensure_packages($_packages)
-  case $type {
-    'os': {}
-    default:   {
-      vcsrepo { $path:
-        ensure   => $ensure,
-        provider => $type,
-        source   => $source,
-        revision => $revision,
-        require  => Package[$_packages],
-      }
+  if $type != 'os' {
+    ensure_packages($_packages)
+    -> vcsrepo { $path:
+      ensure   => $ensure,
+      provider => $type,
+      source   => $source,
+      revision => $revision,
+      require  => Package[$_packages],
     }
   }
 }

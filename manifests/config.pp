@@ -1,5 +1,7 @@
 # == Class: prosody::config
 class prosody::config {
+  include prosody
+
   file { "${prosody::config_directory}/conf.avail":
     ensure => directory,
   }
