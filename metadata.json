@@ -22,6 +22,9 @@
         "10",
         "11"
       ]
+    },
+    {
+      "operatingsystem": "Gentoo",
     }
   ],
   "dependencies": [
