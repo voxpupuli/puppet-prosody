@@ -26,7 +26,6 @@ class prosody::community_modules (
       provider => $type,
       source   => $source,
       revision => $revision,
-      require  => Package[$_packages],
     }
   }
 }
