@@ -47,6 +47,7 @@ define prosody::virtualhost (
   elsif (($ssl_key != undef) and ($ssl_cert != undef) and ($ssl_copy == false)) {
     $prosody_ssl_key  = $ssl_key
     $prosody_ssl_cert = $ssl_cert
+    $config_requires = Class['prosody::package']
   }
 
   else {

@@ -66,6 +66,19 @@ describe 'prosody::virtualhost' do
         }
       end
 
+      context 'with ssl keys and certs but no copy' do
+        let(:ssl_key) { '/etc/prosody/certs/rspec-puppet.com.key' }
+        let(:ssl_cert) { '/etc/prosody/certs/rspec-puppet.com.crt' }
+        let(:params) { { ssl_key: ssl_key, ssl_cert: ssl_cert, ssl_copy: false } }
+
+        it {
+          is_expected.to contain_file(path_avail).with(
+            ensure: 'present',
+            require: ['Class[Prosody::Package]']
+          )
+        }
+      end
+
       context 'ensure => absent' do
         let(:params) { { ensure: 'absent' } }
 
