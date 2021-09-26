@@ -1,14 +1,16 @@
 # == Class: prosody::config
 class prosody::config {
-  file { '/etc/prosody/conf.avail':
+  include prosody
+
+  file { "${prosody::config_directory}/conf.avail":
     ensure => directory,
   }
 
-  file { '/etc/prosody/conf.d':
+  file { "${prosody::config_directory}/conf.d":
     ensure => directory,
   }
 
-  file { '/etc/prosody/prosody.cfg.lua':
+  file { "${prosody::config_directory}/prosody.cfg.lua":
     content => template('prosody/prosody.cfg.erb'),
     require => Class['prosody::package'],
     notify  => Class['prosody::service'],

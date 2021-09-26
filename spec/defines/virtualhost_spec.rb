@@ -14,8 +14,13 @@ describe 'prosody::virtualhost' do
 
       let(:title) { 'mockvirtualhost' }
 
-      let(:path_avail) { "/etc/prosody/conf.avail/#{title}.cfg.lua" }
-      let(:path_link) { "/etc/prosody/conf.d/#{title}.cfg.lua" }
+      let(:path_avail) { "#{config_directory}/conf.avail/#{title}.cfg.lua" }
+      let(:path_link) { "#{config_directory}/conf.d/#{title}.cfg.lua" }
+
+      config_directory = case facts[:osfamily]
+                         when 'Gentoo' then '/etc/jabber'
+                         else '/etc/prosody'
+                         end
 
       context 'with no parameters' do
         it {
@@ -38,31 +43,31 @@ describe 'prosody::virtualhost' do
       end
 
       context 'with ssl_key but no ssl_cert' do
-        let(:params) { { ssl_key: '/etc/prosody/certs/rspec-puppet.com.key' } }
+        let(:params) { { ssl_key: "#{config_directory}/certs/rspec-puppet.com.key" } }
 
         it { is_expected.to compile.and_raise_error(%r{The prosody::virtualhost type needs both ssl_key \*and\* ssl_cert set}) }
       end
 
       context 'with ssl_cert but no ssl_key' do
-        let(:params) { { ssl_cert: '/etc/prosody/certs/rspec-puppet.com.crt' } }
+        let(:params) { { ssl_cert: "#{config_directory}/certs/rspec-puppet.com.crt" } }
 
         it { is_expected.to compile.and_raise_error(%r{The prosody::virtualhost type needs both ssl_key \*and\* ssl_cert set}) }
       end
 
       context 'with ssl keys and certs' do
-        let(:ssl_key) { '/etc/prosody/certs/rspec-puppet.com.key' }
-        let(:ssl_cert) { '/etc/prosody/certs/rspec-puppet.com.crt' }
+        let(:ssl_key) { "#{config_directory}/certs/rspec-puppet.com.key" }
+        let(:ssl_cert) { "#{config_directory}/certs/rspec-puppet.com.crt" }
         let(:params) { { ssl_key: ssl_key, ssl_cert: ssl_cert } }
 
         it {
           # This require statment is bananas
           is_expected.to contain_file(path_avail).with(
             ensure: 'present',
-            require: ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
+            require: ["File[#{config_directory}/certs/mockvirtualhost.key]", "File[#{config_directory}/certs/mockvirtualhost.crt]", 'Class[Prosody::Package]']
           )
 
-          is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.key').with_source(ssl_key)
-          is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.crt').with_source(ssl_cert)
+          is_expected.to contain_file("#{config_directory}/certs/mockvirtualhost.key").with_source(ssl_key)
+          is_expected.to contain_file("#{config_directory}/certs/mockvirtualhost.crt").with_source(ssl_cert)
         }
       end
 

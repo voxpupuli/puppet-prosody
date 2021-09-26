@@ -61,6 +61,8 @@ prosody::user: prosody
 prosody::virtualhost_defaults: {}
 prosody::virtualhosts: {}
 
+prosody::config_directory: '/etc/prosody'
+
 prosody::community_modules::ensure: present
 prosody::community_modules::path: /var/lib/prosody/modules
 prosody::community_modules::source: https://hg.prosody.im/prosody-modules/

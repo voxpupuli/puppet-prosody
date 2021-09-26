@@ -7,14 +7,27 @@ describe 'prosody' do
         os_facts
       end
 
+
       context 'on every platform' do
         it { is_expected.to contain_class 'prosody::package' }
         it { is_expected.to contain_class 'prosody::config' }
         it { is_expected.to contain_class 'prosody::service' }
 
         it { is_expected.to contain_package('prosody').with(ensure: 'present') }
-        it { is_expected.to contain_file('/etc/prosody/conf.avail').with(ensure: 'directory') }
-        it { is_expected.to contain_file('/etc/prosody/conf.d').with(ensure: 'directory') }
+        it {
+          config_directory = case facts[:osfamily]
+                             when 'Gentoo' then '/etc/jabber'
+                             else '/etc/prosody'
+                             end
+          is_expected.to contain_file("#{config_directory}/conf.a'ail").with(ensure: 'directory')
+        }
+        it {
+          config_directory = case facts[:osfamily]
+                             when 'Gentoo' then '/etc/jabber'
+                             else '/etc/prosody'
+                             end
+          is_expected.to contain_file("#{config_directory}/conf.d").with(ensure: 'directory')
+        }
       end
 
       context 'with daemonize => true' do
@@ -41,7 +54,11 @@ describe 'prosody' do
         let(:params) { { custom_options: { 'foo' => 'bar', 'baz' => 'quux' } } }
 
         it {
-          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
+          config_directory = case facts[:osfamily]
+                             when 'Gentoo' then '/etc/jabber'
+                             else '/etc/prosody'
+                             end
+          is_expected.to contain_file("#{config_directory}/prosody.cfg.lua"). \
             with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$})
         }
       end
@@ -50,7 +67,11 @@ describe 'prosody' do
         let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux' } } }
 
         it {
-          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
+          config_directory = case facts[:osfamily]
+                             when 'Gentoo' then '/etc/jabber'
+                             else '/etc/prosody'
+                             end
+          is_expected.to contain_file("#{config_directory}/prosody.cfg.lua"). \
             with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "cool"; "elements" ]$})
         }
       end
