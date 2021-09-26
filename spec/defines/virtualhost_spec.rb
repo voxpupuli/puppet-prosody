@@ -12,15 +12,15 @@ describe 'prosody::virtualhost' do
         os_facts
       end
 
-      config_directory = case facts[:osfamily]
-                         when 'Gentoo' then '/etc/jabber'
-                         else '/etc/prosody'
-                         end
-
       let(:title) { 'mockvirtualhost' }
 
       let(:path_avail) { "#{config_directory}/conf.avail/#{title}.cfg.lua" }
       let(:path_link) { "#{config_directory}/conf.d/#{title}.cfg.lua" }
+
+      config_directory = case facts[:osfamily]
+                         when 'Gentoo' then '/etc/jabber'
+                         else '/etc/prosody'
+                         end
 
       context 'with no parameters' do
         it {
