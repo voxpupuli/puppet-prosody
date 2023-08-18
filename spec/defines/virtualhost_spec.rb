@@ -105,7 +105,7 @@ describe 'prosody::virtualhost' do
 
         it {
           is_expected.to contain_file(path_avail). \
-            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "cool"; "elements" ]$})
+            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "col;emnts]$})
         }
       end
 
@@ -116,7 +116,7 @@ describe 'prosody::virtualhost' do
           is_expected.to contain_file(path_avail). \
             with_content(%r{^Component "comp1" "muc"$}). \
             with_content(%r{^  bo = true;$}). \
-            with_content(%r{^  arr = { "one"; "two" };$}).\
+            with_content(%r{^  arr = { "one"; "two" };$}). \
             with_content(%r{^  str = "string";$})
         }
       end
@@ -126,7 +126,7 @@ describe 'prosody::virtualhost' do
 
         it {
           is_expected.to contain_file(path_avail). \
-            with_content(%r{^disco_items = \{\n  \{ \"foo\" \}\;\n  \{ \"bar\" \}\;\n\}})
+            with_content(%r{^disco_items = \{\n  \{ "foo" \};\n  \{ "bar" \};\n\}})
         }
       end
     end
