@@ -3,7 +3,7 @@ require 'erb'
 
 describe 'prosody::virtualhost' do
   let(:pre_condition) do
-    'include ::prosody'
+    'include prosody'
   end
 
   on_supported_os.each do |os, os_facts|
