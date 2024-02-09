@@ -27,6 +27,7 @@ return {
           )
         }
       end
+
       context 'with complex domain' do
         let(:params) { { name: 'bob', pass: 'pass123', host: 'foo-bar.com' } }
 
@@ -40,6 +41,7 @@ return {
           )
         }
       end
+
       context 'with complex username' do
         let(:params) { { name: 'bob.bar-foo', pass: 'pass123' } }
 
@@ -53,6 +55,7 @@ return {
           )
         }
       end
+
       context 'with purging enabled' do
         let(:params) { { name: 'bob', pass: 'pass123', purge: true } }
 
