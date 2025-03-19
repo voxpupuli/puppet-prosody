@@ -1,7 +1,7 @@
 # == Class: prosody::package
 class prosody::package {
   package { $prosody::package_name:
-    ensure  => $prosody::package_ensure,
+    ensure => $prosody::package_ensure,
   }
 
   if $prosody::manage_repository {
