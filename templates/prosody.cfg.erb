@@ -21,30 +21,30 @@
 -- (see https://prosody.im/doc/creating_accounts for info)
 -- Example: admins = { "user1@example.com", "user2@example.net" }
 admins = {
-<% scope.lookupvar('prosody::admins').each do |admin| -%>
+<% @admins.each do |admin| -%>
     "<%= admin %>",
 <% end -%>
 }
 
-<% if scope.lookupvar('prosody::user') != '' -%>
+<% if @user != '' -%>
 -- User to run prosody as
-prosody_user = "<%= scope.lookupvar('prosody::user') %>"
+prosody_user = "<%= @user %>"
 <% end -%>
-<% if scope.lookupvar('prosody::group') != '' -%>
+<% if @group != '' -%>
 -- Group to run prosody as
-prosody_group = "<%= scope.lookupvar('prosody::group') %>"
+prosody_group = "<%= @group %>"
 <% end -%>
 
 -- Which interfaces (addresses) to listen on
 interfaces = {
-<% scope.lookupvar('prosody::interfaces').each do |interface| -%>
+<% @interfaces.each do |interface| -%>
     "<%= interface %>",
 <% end -%>
 }
 
 -- Enable use of libevent for better performance under high load
 -- For more information see: https://prosody.im/doc/libevent
-use_libevent = <%= scope.lookupvar('prosody::use_libevent') %>;
+use_libevent = <%= @use_libevent %>;
 
 -- This is the list of modules Prosody will load on startup.
 -- It looks for mod_modulename.lua in the plugins folder, so make sure that exists too.
@@ -52,19 +52,18 @@ use_libevent = <%= scope.lookupvar('prosody::use_libevent') %>;
 modules_enabled = {
 
   -- Base modules
-<% scope.lookupvar('prosody::modules_base').each do |mod| -%>
+<% @modules_base.each do |mod| -%>
     "<%= mod %>";
 <% end -%>
 
   -- Custom modules
-<% scope.lookupvar('prosody::modules').each do |mod| -%>
+<% @modules.each do |mod| -%>
     "<%= mod %>";
 <% end -%>
 
 };
 
-<%- community_modules = scope.lookupvar('prosody::community_modules')
-    if community_modules != [] -%>
+<%- if @community_modules != [] -%>
 -- Where to search for plugins/modules
 plugin_paths = {
 <%- base_path = scope.lookupvar('prosody::community_modules::path')
@@ -74,12 +73,11 @@ plugin_paths = {
 };
 <%- end -%>
 
-<%- modules_disabled = scope.lookupvar('prosody::modules_disabled')
-    if modules_disabled != [] -%>
+<%- if @modules_disabled != [] -%>
 -- These modules are auto-loaded, but should you want
 -- to disable them then uncomment them here:
 modules_disabled = {
-<% scope.lookupvar('prosody::modules_disabled').each do |mod| -%>
+<% @modules_disabled.each do |mod| -%>
     "<%= mod %>";
 <%- end -%>
 };
@@ -87,38 +85,35 @@ modules_disabled = {
 
 -- Disable account creation by default, for security
 -- For more information see https://prosody.im/doc/creating_accounts
-allow_registration = <%= scope.lookupvar('prosody::allow_registration') %>;
+allow_registration = <%= @allow_registration %>;
 
 -- Debian:
 --   send the server to background.
 --
-daemonize = <%= scope.lookupvar('prosody::daemonize') %>;
+daemonize = <%= @daemonize %>;
 
 <% if scope.lookupvar('prosody::ssl_custom_config') -%>
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
-  <% unless scope.lookupvar('prosody::ssl_protocol').nil? -%>
-  protocol = "<%= scope.lookupvar('prosody::ssl_protocol') %>";
+  <% unless @ssl_protocol.nil? -%>
+  protocol = "<%= @ssl_protocol %>";
   <% end -%>
   options = {
-  <%- scope.lookupvar('prosody::ssl_options').each do |option| -%>
+  <%- @ssl_options.each do |option| -%>
     "<%= option %>",
   <%- end -%>
   };
-  ciphers = "<%= scope.lookupvar('prosody::ssl_ciphers') %>";
-  curve = "<%= scope.lookupvar('prosody::ssl_curve') %>";
-  <%- dhparam = scope.lookupvar('prosody::ssl_dhparam')
-      if dhparam != '' -%>
-  dhparam = "<%= dhparam %>";
+  ciphers = "<%= @ssl_ciphers %>";
+  curve = "<%= @ssl_curve %>";
+  <%- if @ssl_dhparam != '' -%>
+  dhparam = "<%= @ssl_dhparam %>";
   <%- end -%>
-  <%- ssl_key = scope.lookupvar('prosody::ssl_key')
-      if ssl_key != :undef -%>
-  key = "<%= ssl_key %>";
+  <%- if @ssl_key -%>
+  key = "<%= @ssl_key %>";
   <%- end -%>
-  <%- ssl_cert = scope.lookupvar('prosody::ssl_cert')
-      if ssl_cert != :undef -%>
-  certificate = "<%= ssl_cert %>";
+  <%- if @ssl_cert -%>
+  certificate = "<%= @ssl_cert %>";
   <%- end -%>
 }
 <% end -%>
@@ -126,11 +121,11 @@ ssl = {
 -- Force clients to use encrypted connections? This option will
 -- prevent clients from authenticating unless they are using encryption.
 
-c2s_require_encryption = <%= scope.lookupvar('prosody::c2s_require_encryption') %>
+c2s_require_encryption = <%= @c2s_require_encryption %>
 
 -- Force servers to use encrypted connections?
 
-s2s_require_encryption = <%= scope.lookupvar('prosody::s2s_require_encryption') %>
+s2s_require_encryption = <%= @s2s_require_encryption %>
 
 
 -- Force certificate authentication for server-to-server connections?
@@ -139,14 +134,14 @@ s2s_require_encryption = <%= scope.lookupvar('prosody::s2s_require_encryption') 
 -- NOTE: Your version of LuaSec must support certificate verification!
 -- For more information see https://prosody.im/doc/s2s#security
 
-s2s_secure_auth = <%= scope.lookupvar('prosody::s2s_secure_auth') %>
+s2s_secure_auth = <%= @s2s_secure_auth %>
 
 -- Many servers don't support encryption or have invalid or self-signed
 -- certificates. You can list domains here that will not be required to
 -- authenticate using certificates. They will be authenticated using DNS.
 
 s2s_insecure_domains = {
-<% scope.lookupvar('prosody::s2s_insecure_domains').each do |domain| -%>
+<% @s2s_insecure_domains.each do |domain| -%>
     "<%= domain %>",
 <% end -%>
 }
@@ -155,7 +150,7 @@ s2s_insecure_domains = {
 -- certificates for some domains by specifying a list here.
 
 s2s_secure_domains = {
-<% scope.lookupvar('prosody::s2s_secure_domains').each do |domain| -%>
+<% @s2s_secure_domains.each do |domain| -%>
     "<%= domain %>",
 <% end -%>
 }
@@ -177,12 +172,12 @@ def print_recursive(object, indentation = 0)
 end
 -%>
 
-<% scope.lookupvar('prosody::custom_options').sort.each do |option, value| -%>
+<% @custom_options.sort.each do |option, value| -%>
 <%= option %> = <%= print_recursive(value) %>
 <% end -%>
 
 -- Required for init scripts and prosodyctl
-pidfile = "<%= scope.lookupvar('prosody::pidfile') %>"
+pidfile = "<%= @pidfile %>"
 
 -- Select the authentication backend to use. The 'internal' providers
 -- use Prosody's configured data storage to store the authentication data.
@@ -191,40 +186,38 @@ pidfile = "<%= scope.lookupvar('prosody::pidfile') %>"
 -- server please see https://prosody.im/doc/modules/mod_auth_internal_hashed
 -- for information about using the hashed backend.
 
-authentication = "<%= scope.lookupvar('prosody::authentication') %>"
+authentication = "<%= @authentication %>"
 
 -- Select the storage backend to use. By default Prosody uses flat files
 -- in its configured data directory, but it also supports more backends
 -- through modules. An "sql" backend is included by default, but requires
 -- additional dependencies. See https://prosody.im/doc/storage for more info.
 
-<%- storage = scope.lookupvar('prosody::storage')
-    if storage != :undef
-      if storage.is_a?(String) -%>
-storage = "<%= storage %>"
-  <%- elsif storage.is_a?(Hash) -%>
+<%- if @storage 
+      if @storage.is_a?(String) -%>
+storage = "<%= @storage %>"
+  <%- elsif @storage.is_a?(Hash) -%>
 storage = {
-        <%- storage.sort.each do |type,location| -%>
+        <%- @storage.sort.each do |type,location| -%>
    <%= type %> = "<%= location %>";
         <%- end -%>
 }
       <%- end -%>
 <%- end -%>
 
-<%- sql = scope.lookupvar('prosody::sql')
-unless sql.nil? -%>
-sql = { driver = "<%= sql['driver'] %>", database = "<%= sql ['database'] %>", username = "<%= sql['username'] %>", password = "<%= sql['password'] %>", host = "<%= sql['host'] %>" }
+<%- unless @sql.nil? -%>
+sql = { driver = "<%= @sql['driver'] %>", database = "<%= @sql['database'] %>", username = "<%= @sql['username'] %>", password = "<%= @sql['password'] %>", host = "<%= @sql['host'] %>" }
 <%- end -%>
 
 -- Logging configuration
 -- For advanced logging see https://prosody.im/doc/logging
 log = {
-        <%= scope.lookupvar('prosody::log_level') -%> = "<%= scope.lookupvar('prosody::info_log') -%>"; -- Change 'info' to 'debug' for verbose logging
-        error = "<%= scope.lookupvar('prosody::error_log') -%>";
-<% scope.lookupvar('prosody::log_sinks').each do |sink|  -%>
+        <%= @log_level -%> = "<%= @info_log -%>"; -- Change 'info' to 'debug' for verbose logging
+        error = "<%= @error_log -%>";
+<% @log_sinks.each do |sink|  -%>
         "*<%= sink %>";
 <% end -%>
-<% scope.lookupvar('prosody::log_advanced').each do |level, destination|  -%>
+<% @log_advanced.each do |level, destination|  -%>
     { levels = { <%= level %> }; to = <%= destination %>; };
 <% end -%>
 }
@@ -234,7 +227,7 @@ log = {
 -- like multi-user conferences, and transports.
 -- For more information on components, see https://prosody.im/doc/components
 
-<% scope.lookupvar('prosody::components').sort.each do |name, component| %>
+<% @components.sort.each do |name, component| %>
 Component "<%= name %>" <% if component.include?('type') then %>"<%= component['type'] %>"<% end %>
   <%- if component.include?('secret') -%>
   component_secret = "<%= component['secret'] %>"
