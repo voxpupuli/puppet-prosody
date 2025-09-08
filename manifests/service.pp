@@ -10,7 +10,6 @@ class prosody::service (
       enable    => true,
       hasstatus => $hasstatus,
       restart   => $restart,
-      require   => Class[prosody::config],
     }
   }
 }
