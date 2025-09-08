@@ -3,3 +3,6 @@
 
 # remove daemonize parameter (deprecated in prosody 0.12)
 prosody::damonize: ~
+
+# remove use_libevent parameter
+prosody::use_libevent: ~

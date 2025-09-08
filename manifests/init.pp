@@ -38,7 +38,7 @@ class prosody (
   String $ssl_dhparam,
   Array[String] $ssl_options,
   Variant[Hash, Enum['internal', 'sql', 'memory', 'null', 'none']] $storage,
-  Boolean $use_libevent,
+  Optional[Boolean] $use_libevent,
   String $user,
   Hash $virtualhost_defaults,
   Hash $virtualhosts,
