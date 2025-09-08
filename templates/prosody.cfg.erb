@@ -96,7 +96,7 @@ daemonize = <%= @daemonize %>;
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
-  <% unless @ssl_protocol.nil? -%>
+  <% if @ssl_protocol -%>
   protocol = "<%= @ssl_protocol %>";
   <% end -%>
   options = {
@@ -193,8 +193,7 @@ authentication = "<%= @authentication %>"
 -- through modules. An "sql" backend is included by default, but requires
 -- additional dependencies. See https://prosody.im/doc/storage for more info.
 
-<%- if @storage 
-      if @storage.is_a?(String) -%>
+<%- if @storage.is_a?(String) -%>
 storage = "<%= @storage %>"
   <%- elsif @storage.is_a?(Hash) -%>
 storage = {
@@ -202,10 +201,9 @@ storage = {
    <%= type %> = "<%= location %>";
         <%- end -%>
 }
-      <%- end -%>
 <%- end -%>
 
-<%- unless @sql.nil? -%>
+<%- if @sql -%>
 sql = { driver = "<%= @sql['driver'] %>", database = "<%= @sql['database'] %>", username = "<%= @sql['username'] %>", password = "<%= @sql['password'] %>", host = "<%= @sql['host'] %>" }
 <%- end -%>
 
