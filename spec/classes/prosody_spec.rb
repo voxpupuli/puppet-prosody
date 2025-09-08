@@ -52,7 +52,9 @@ describe 'prosody' do
 
         it {
           is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
-            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "col;emnts]$})
+            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}). \
+            with_content(%r{^baz = "quux"$}). \
+            with_content(%r{^bar = { "cool", "elements" }$})
         }
       end
     end
