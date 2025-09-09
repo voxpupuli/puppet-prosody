@@ -232,11 +232,7 @@ Component "<%= name %>" <% if component.include?('type') then %>"<%= component['
   <%- end -%>
   <%- if component.include?('options') -%>
     <%- component['options'].sort.each do |k, v| -%>
-      <%- if ( v.is_a? Array ) -%>
-  <%= k %> = { "<%= v.join('", "') %>" };
-      <%- else -%>
-  <%= k %> = <%= v %>;
-      <%- end -%>
+  <%= k %> = <%= print_recursive(v) %>;
     <%- end -%>
   <%- end -%>
 <% end -%>

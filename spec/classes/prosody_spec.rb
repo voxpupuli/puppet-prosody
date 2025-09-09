@@ -59,6 +59,18 @@ describe 'prosody' do
             with_content(%r{^bar = { "cool", "elements" }$})
         }
       end
+
+      context 'with component options' do
+        let(:params) { { components: { 'conference.test.ch' => { 'type' => 'muc', 'options' => { 'int' => 42, 'str' => 'twentyfour', 'arr' => %w[two four] } } } } }
+
+        it {
+          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
+            with_content(%r{^Component "conference.test.ch" "muc"}). \
+            with_content(%r{^  arr = { "two", "four" };}). \
+            with_content(%r{^  int = 42;}). \
+            with_content(%r{^  str = "twentyfour";})
+        }
+      end
     end
   end
 end
