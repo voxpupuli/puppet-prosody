@@ -48,17 +48,26 @@ class prosody (
   if ($community_modules != []) {
     class { 'prosody::community_modules':
       require => Class['prosody::package'],
-      before  => Class['prosody::config'],
+      before  => File['/etc/prosody/prosody.cfg.lua'],
     }
   }
 
   contain 'prosody::package'
-  contain 'prosody::config'
   contain 'prosody::service'
 
   Class['prosody::package']
-  -> Class['prosody::config']
   ~> Class['prosody::service']
+
+  file { ['/etc/prosody/conf.avail', '/etc/prosody/conf.d']:
+    ensure  => directory,
+    require => Class['prosody::package'],
+  }
+
+  file { '/etc/prosody/prosody.cfg.lua':
+    content => template('prosody/prosody.cfg.erb'),
+    require => Class['prosody::package'],
+    notify  => Class['prosody::service'],
+  }
 
   # create virtualhost resources via hiera
   create_resources('prosody::virtualhost', $virtualhosts, $virtualhost_defaults)

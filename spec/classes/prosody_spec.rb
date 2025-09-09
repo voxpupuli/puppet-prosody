@@ -11,7 +11,6 @@ describe 'prosody' do
 
       context 'on every platform' do
         it { is_expected.to contain_class 'prosody::package' }
-        it { is_expected.to contain_class 'prosody::config' }
         it { is_expected.to contain_class 'prosody::service' }
 
         it { is_expected.to contain_package('prosody').with(ensure: 'present') }
@@ -45,7 +44,8 @@ describe 'prosody' do
         it {
           is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
             with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$}). \
-            with_content(%r{^int = 42$})
+            with_content(%r{^int = 42$}). \
+            with_notify('Class[Prosody::Service]')
         }
       end
 
