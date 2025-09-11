@@ -1,5 +1,10 @@
 # @summary Manage Prosody
 #
+# @param use_libevent
+#   use libevent for keeping track of network connections
+#   this parameter is deprecated, in favor of 
+#   network_backend (use options to set value)
+#   
 # @param daemonize
 #   if the server should be sent to background or not
 #   deprecated since prosody version 0.12
