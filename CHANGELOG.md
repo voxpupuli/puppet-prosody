@@ -4,11 +4,57 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [UNRELEASED]
+## [v2.0.0](https://github.com/voxpupuli/puppet-prosody/tree/v2.0.0) (2025-09-12)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-prosody/compare/v1.0.0...v2.0.0)
+
+**Breaking changes:**
+
+- Drop support for EOL Ubuntu 20.04 [\#121](https://github.com/voxpupuli/puppet-prosody/pull/121) ([kenyon](https://github.com/kenyon))
+- Drop puppet, update openvox minimum version to 8.19 [\#113](https://github.com/voxpupuli/puppet-prosody/pull/113) ([TheMeier](https://github.com/TheMeier))
+- Drop Debian 10 support [\#99](https://github.com/voxpupuli/puppet-prosody/pull/99) ([zilchms](https://github.com/zilchms))
+- Drop Ubuntu 16.04 and 18.04 support [\#98](https://github.com/voxpupuli/puppet-prosody/pull/98) ([zilchms](https://github.com/zilchms))
+- Drop Puppet 6 support [\#92](https://github.com/voxpupuli/puppet-prosody/pull/92) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add support for Ubuntu 22.04 and 24.04 [\#120](https://github.com/voxpupuli/puppet-prosody/pull/120) ([kenyon](https://github.com/kenyon))
+- Add Debian 13 \(trixie\) support + acceptance tests [\#118](https://github.com/voxpupuli/puppet-prosody/pull/118) ([trefzer](https://github.com/trefzer))
+- Add support for Debian 12 [\#115](https://github.com/voxpupuli/puppet-prosody/pull/115) ([smortex](https://github.com/smortex))
+- puppetlabs/vcsrepo: Allow 7.x [\#112](https://github.com/voxpupuli/puppet-prosody/pull/112) ([TheMeier](https://github.com/TheMeier))
+- metadata.json: Add OpenVox [\#109](https://github.com/voxpupuli/puppet-prosody/pull/109) ([jstraw](https://github.com/jstraw))
+- puppetlabs/vcsrepo: Allow 6.x [\#97](https://github.com/voxpupuli/puppet-prosody/pull/97) ([zilchms](https://github.com/zilchms))
+- Add Puppet 8 support [\#94](https://github.com/voxpupuli/puppet-prosody/pull/94) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#93](https://github.com/voxpupuli/puppet-prosody/pull/93) ([bastelfreak](https://github.com/bastelfreak))
+- add support for Debian \(buster/bullseye\) [\#82](https://github.com/voxpupuli/puppet-prosody/pull/82) ([trefzer](https://github.com/trefzer))
+- added ldap as an acceptable authentication value. [\#76](https://github.com/voxpupuli/puppet-prosody/pull/76) ([Sudman1](https://github.com/Sudman1))
 
 **Fixed bugs:**
 
-- Fixed authentication enumeration issue [\#75](https://github.com/voxpupuli/puppet-prosody/issues/75)
+- Fix a syntax error in deeply nested custom\_options. [\#80](https://github.com/voxpupuli/puppet-prosody/pull/80) ([NiklausHofer](https://github.com/NiklausHofer))
+- Fixed ssl block creation  \(\#73\) [\#74](https://github.com/voxpupuli/puppet-prosody/pull/74) ([Sudman1](https://github.com/Sudman1))
+
+**Closed issues:**
+
+- template function print\_recursive uses ';' instead of ',' [\#88](https://github.com/voxpupuli/puppet-prosody/issues/88)
+- Array in component options is displayed wrong [\#84](https://github.com/voxpupuli/puppet-prosody/issues/84)
+- Type: authentication.pp - Add ldap [\#75](https://github.com/voxpupuli/puppet-prosody/issues/75)
+- Template: virtualhost.cfg.erb - SSL section exists when cert/key not specified [\#73](https://github.com/voxpupuli/puppet-prosody/issues/73)
+- Release in puppet forge [\#66](https://github.com/voxpupuli/puppet-prosody/issues/66)
+
+**Merged pull requests:**
+
+- attempt to make the main template more readable [\#117](https://github.com/voxpupuli/puppet-prosody/pull/117) ([trefzer](https://github.com/trefzer))
+- use print\_recursive for component options [\#116](https://github.com/voxpupuli/puppet-prosody/pull/116) ([trefzer](https://github.com/trefzer))
+- Remove legacy top-scope syntax [\#95](https://github.com/voxpupuli/puppet-prosody/pull/95) ([smortex](https://github.com/smortex))
+- add Integer to print\_recursive [\#90](https://github.com/voxpupuli/puppet-prosody/pull/90) ([trefzer](https://github.com/trefzer))
+- fix array in print\_recursive function \(in both templates !\) [\#89](https://github.com/voxpupuli/puppet-prosody/pull/89) ([trefzer](https://github.com/trefzer))
+- add possibility to force service and spec tests for service [\#87](https://github.com/voxpupuli/puppet-prosody/pull/87) ([trefzer](https://github.com/trefzer))
+- fix virtualhost missing $config\_requires if $ssl\_copy is false [\#86](https://github.com/voxpupuli/puppet-prosody/pull/86) ([trefzer](https://github.com/trefzer))
+- fix template to display of component options [\#85](https://github.com/voxpupuli/puppet-prosody/pull/85) ([trefzer](https://github.com/trefzer))
+- Tests [\#83](https://github.com/voxpupuli/puppet-prosody/pull/83) ([ghoneycutt](https://github.com/ghoneycutt))
+- Show the loading of modules for specific components in the README example. [\#81](https://github.com/voxpupuli/puppet-prosody/pull/81) ([NiklausHofer](https://github.com/NiklausHofer))
+- Allow stdlib 8.0.0 [\#77](https://github.com/voxpupuli/puppet-prosody/pull/77) ([smortex](https://github.com/smortex))
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-prosody/tree/v1.0.0) (2021-04-26)
 
@@ -26,7 +72,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Fix user creation if domain contains a dash [\#61](https://github.com/voxpupuli/puppet-prosdy/pull/61) ([Bluewind](https://github.com/Bluewind))
+- Fix user creation if domain contains a dash [\#61](https://github.com/voxpupuli/puppet-prosody/pull/61) ([Bluewind](https://github.com/Bluewind))
 
 **Closed issues:**
 
@@ -90,7 +136,7 @@ These should not affect the functionality of the module.
 
 **Implemented enhancements:**
 
-- SSL Fixes [\#9](https://github.com/voxpupuli/puppet-prosody/pull/9) ([andschwa](https://github.com/andschwa))
+- SSL Fixes [\#9](https://github.com/voxpupuli/puppet-prosody/pull/9) ([andyleejordan](https://github.com/andyleejordan))
 
 **Closed issues:**
 
@@ -152,12 +198,12 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Clean branch that deletes those pesky lines [\#7](https://github.com/voxpupuli/puppet-prosody/pull/7) ([andschwa](https://github.com/andschwa))
-- Removing openssl package [\#5](https://github.com/voxpupuli/puppet-prosody/pull/5) ([andschwa](https://github.com/andschwa))
-- Using ensure\_packages instead of ensure\_resource [\#4](https://github.com/voxpupuli/puppet-prosody/pull/4) ([andschwa](https://github.com/andschwa))
-- Updating repository URL [\#3](https://github.com/voxpupuli/puppet-prosody/pull/3) ([andschwa](https://github.com/andschwa))
-- Removing libevent package \(bugfix\) [\#2](https://github.com/voxpupuli/puppet-prosody/pull/2) ([andschwa](https://github.com/andschwa))
-- Add ability to create virtualhosts through hiera [\#1](https://github.com/voxpupuli/puppet-prosody/pull/1) ([andschwa](https://github.com/andschwa))
+- Clean branch that deletes those pesky lines [\#7](https://github.com/voxpupuli/puppet-prosody/pull/7) ([andyleejordan](https://github.com/andyleejordan))
+- Removing openssl package [\#5](https://github.com/voxpupuli/puppet-prosody/pull/5) ([andyleejordan](https://github.com/andyleejordan))
+- Using ensure\_packages instead of ensure\_resource [\#4](https://github.com/voxpupuli/puppet-prosody/pull/4) ([andyleejordan](https://github.com/andyleejordan))
+- Updating repository URL [\#3](https://github.com/voxpupuli/puppet-prosody/pull/3) ([andyleejordan](https://github.com/andyleejordan))
+- Removing libevent package \(bugfix\) [\#2](https://github.com/voxpupuli/puppet-prosody/pull/2) ([andyleejordan](https://github.com/andyleejordan))
+- Add ability to create virtualhosts through hiera [\#1](https://github.com/voxpupuli/puppet-prosody/pull/1) ([andyleejordan](https://github.com/andyleejordan))
 
 
 
