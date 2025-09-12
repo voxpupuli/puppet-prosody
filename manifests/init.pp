@@ -1,5 +1,14 @@
 # @summary Manage Prosody
 #
+# @param use_libevent
+#   use libevent for keeping track of network connections
+#   this parameter is deprecated, in favor of 
+#   network_backend (use options to set value)
+#   
+# @param daemonize
+#   if the server should be sent to background or not
+#   deprecated since prosody version 0.12
+#
 class prosody (
   Array[String] $admins,
   Boolean $allow_registration,
@@ -8,7 +17,7 @@ class prosody (
   Array[String] $community_modules,
   Hash $components,
   Hash $custom_options,
-  Boolean $daemonize,
+  Optional[Boolean] $daemonize,
   Stdlib::Absolutepath $error_log,
   String $group,
   Stdlib::Absolutepath $info_log,
@@ -34,7 +43,7 @@ class prosody (
   String $ssl_dhparam,
   Array[String] $ssl_options,
   Variant[Hash, Enum['internal', 'sql', 'memory', 'null', 'none']] $storage,
-  Boolean $use_libevent,
+  Optional[Boolean] $use_libevent,
   String $user,
   Hash $virtualhost_defaults,
   Hash $virtualhosts,

@@ -42,9 +42,11 @@ interfaces = {
 <% end -%>
 }
 
+<% unless @use_libevent.nil? -%>
 -- Enable use of libevent for better performance under high load
 -- For more information see: https://prosody.im/doc/libevent
 use_libevent = <%= @use_libevent %>;
+<% end -%>
 
 -- This is the list of modules Prosody will load on startup.
 -- It looks for mod_modulename.lua in the plugins folder, so make sure that exists too.
@@ -87,10 +89,12 @@ modules_disabled = {
 -- For more information see https://prosody.im/doc/creating_accounts
 allow_registration = <%= @allow_registration %>;
 
+<% unless @ssl_protocol.nil? -%>
 -- Debian:
 --   send the server to background.
 --
 daemonize = <%= @daemonize %>;
+<% end -%>
 
 <% if scope.lookupvar('prosody::ssl_custom_config') -%>
 -- These are the SSL/TLS-related settings. If you don't want
