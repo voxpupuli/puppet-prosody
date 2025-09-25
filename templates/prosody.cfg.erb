@@ -89,7 +89,7 @@ modules_disabled = {
 -- For more information see https://prosody.im/doc/creating_accounts
 allow_registration = <%= @allow_registration %>;
 
-<% unless @ssl_protocol.nil? -%>
+<% unless @daemonize.nil? -%>
 -- Debian:
 --   send the server to background.
 --
