@@ -23,7 +23,7 @@ describe 'prosody' do
 
         it {
           is_expected.to contain_service('prosody').with(
-            ensure: 'running'
+            ensure: 'running',
           )
         }
       end
@@ -33,7 +33,7 @@ describe 'prosody' do
 
         it {
           is_expected.not_to contain_service('prosody').with(
-            ensure: 'running'
+            ensure: 'running',
           )
         }
       end
@@ -42,10 +42,10 @@ describe 'prosody' do
         let(:params) { { custom_options: { 'foo' => 'bar', 'baz' => 'quux', 'int' => 42 } } }
 
         it {
-          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
-            with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$}). \
-            with_content(%r{^int = 42$}). \
-            with_notify('Class[Prosody::Service]')
+          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua')
+            .with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$})
+            .with_content(%r{^int = 42$})
+            .with_notify('Class[Prosody::Service]')
         }
       end
 
@@ -53,10 +53,10 @@ describe 'prosody' do
         let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux' } } }
 
         it {
-          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
-            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}). \
-            with_content(%r{^baz = "quux"$}). \
-            with_content(%r{^bar = { "cool", "elements" }$})
+          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua')
+            .with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$})
+            .with_content(%r{^baz = "quux"$})
+            .with_content(%r{^bar = { "cool", "elements" }$})
         }
       end
 
@@ -64,11 +64,11 @@ describe 'prosody' do
         let(:params) { { components: { 'conference.test.ch' => { 'type' => 'muc', 'options' => { 'int' => 42, 'str' => 'twentyfour', 'arr' => %w[two four] } } } } }
 
         it {
-          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
-            with_content(%r{^Component "conference.test.ch" "muc"}). \
-            with_content(%r{^  arr = { "two", "four" };}). \
-            with_content(%r{^  int = 42;}). \
-            with_content(%r{^  str = "twentyfour";})
+          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua')
+            .with_content(%r{^Component "conference.test.ch" "muc"})
+            .with_content(%r{^  arr = { "two", "four" };})
+            .with_content(%r{^  int = 42;})
+            .with_content(%r{^  str = "twentyfour";})
         }
       end
 
@@ -78,9 +78,9 @@ describe 'prosody' do
         it { is_expected.to compile.with_all_deps }
 
         it {
-          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua'). \
-            with_content(%r{"[^"]+/mod_coolmod";}). \
-            with_content(%r{"[^"]+/mod_othermod";})
+          is_expected.to contain_file('/etc/prosody/prosody.cfg.lua')
+            .with_content(%r{"[^"]+/mod_coolmod";})
+            .with_content(%r{"[^"]+/mod_othermod";})
         }
       end
     end

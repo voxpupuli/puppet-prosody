@@ -23,7 +23,7 @@ return {
 };',
             ensure: 'present',
             recurse: false,
-            purge: false
+            purge: false,
           )
         }
       end
@@ -37,7 +37,7 @@ return {
 return {
   [\"password\"] = \"pass123\";
 };',
-            ensure: 'present'
+            ensure: 'present',
           )
         }
       end
@@ -51,7 +51,7 @@ return {
 return {
   [\"password\"] = \"pass123\";
 };',
-            ensure: 'present'
+            ensure: 'present',
           )
         }
       end
@@ -61,7 +61,7 @@ return {
 
         it {
           is_expected.to contain_file('/var/lib/prosodoy/foo%2dbar%2ecom/accounts/bob.dat').with(
-            ensure: 'present'
+            ensure: 'present',
           )
         }
 
@@ -69,7 +69,7 @@ return {
           is_expected.to contain_file('/var/lib/prosodoy/foo%2dbar%2ecom/accounts').with(
             ensure: 'present',
             purge: true,
-            recurse: true
+            recurse: true,
           )
         }
       end
