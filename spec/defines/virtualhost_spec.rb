@@ -20,7 +20,7 @@ describe 'prosody::virtualhost' do
       context 'with no parameters' do
         it {
           is_expected.to contain_file(path_avail).with(
-            ensure: 'present'
+            ensure: 'present',
           )
         }
 
@@ -28,7 +28,7 @@ describe 'prosody::virtualhost' do
           is_expected.to contain_file(path_link).with(
             ensure: 'link',
             target: path_avail,
-            require: "File[#{path_avail}]"
+            require: "File[#{path_avail}]",
           )
         }
       end
@@ -58,7 +58,7 @@ describe 'prosody::virtualhost' do
           # This require statment is bananas
           is_expected.to contain_file(path_avail).with(
             ensure: 'present',
-            require: ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]']
+            require: ['File[/etc/prosody/certs/mockvirtualhost.key]', 'File[/etc/prosody/certs/mockvirtualhost.crt]', 'Class[Prosody::Package]'],
           )
 
           is_expected.to contain_file('/etc/prosody/certs/mockvirtualhost.key').with_source(ssl_key)
@@ -74,7 +74,7 @@ describe 'prosody::virtualhost' do
         it {
           is_expected.to contain_file(path_avail).with(
             ensure: 'present',
-            require: ['Class[Prosody::Package]']
+            require: ['Class[Prosody::Package]'],
           )
         }
       end
@@ -95,9 +95,9 @@ describe 'prosody::virtualhost' do
         let(:params) { { custom_options: { 'foo' => 'bar', 'baz' => 'quux', 'int' => 42 } } }
 
         it {
-          is_expected.to contain_file(path_avail). \
-            with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$}). \
-            with_content(%r{^int = 42$})
+          is_expected.to contain_file(path_avail)
+            .with_content(%r{^foo = "bar"$}, %r{^baz = "quux"$})
+            .with_content(%r{^int = 42$})
         }
       end
 
@@ -105,9 +105,9 @@ describe 'prosody::virtualhost' do
         let(:params) { { custom_options: { 'foo' => { 'fnord' => '23', 'xyzzy' => '42' }, 'bar' => %w[cool elements], 'baz' => 'quux', 'int' => 42 } } }
 
         it {
-          is_expected.to contain_file(path_avail). \
-            with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "col;emnts]$}). \
-            with_content(%r{^int = 42$})
+          is_expected.to contain_file(path_avail)
+            .with_content(%r{^foo = {\n  fnord = "23";\n  xyzzy = "42";\n}$}, %r{^baz = "quux"$}, %r{^bar = [ "col;emnts]$})
+            .with_content(%r{^int = 42$})
         }
       end
 
@@ -115,12 +115,12 @@ describe 'prosody::virtualhost' do
         let(:params) { { components: { 'comp1' => { 'type' => 'muc', 'options' => { 'bo' => true, 'arr' => %w[one two], 'str' => 'string', 'int' => 42 } } } } }
 
         it {
-          is_expected.to contain_file(path_avail). \
-            with_content(%r{^Component "comp1" "muc"$}). \
-            with_content(%r{^  bo = true;$}). \
-            with_content(%r{^  arr = { "one", "two" };$}). \
-            with_content(%r{^  str = "string";$}). \
-            with_content(%r{^  int = 42;$})
+          is_expected.to contain_file(path_avail)
+            .with_content(%r{^Component "comp1" "muc"$})
+            .with_content(%r{^  bo = true;$})
+            .with_content(%r{^  arr = { "one", "two" };$})
+            .with_content(%r{^  str = "string";$})
+            .with_content(%r{^  int = 42;$})
         }
       end
 
@@ -128,8 +128,8 @@ describe 'prosody::virtualhost' do
         let(:params) { { disco_items: %w[foo bar] } }
 
         it {
-          is_expected.to contain_file(path_avail). \
-            with_content(%r{^disco_items = \{\n  \{ "foo" \};\n  \{ "bar" \};\n\}})
+          is_expected.to contain_file(path_avail)
+            .with_content(%r{^disco_items = \{\n  \{ "foo" \};\n  \{ "bar" \};\n\}})
         }
       end
     end

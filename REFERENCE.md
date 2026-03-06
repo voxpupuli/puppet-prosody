@@ -82,6 +82,8 @@ use libevent for keeping track of network connections
 this parameter is deprecated, in favor of
 network_backend (use options to set value)
 
+Default value: `true`
+
 ##### <a name="-prosody--daemonize"></a>`daemonize`
 
 Data type: `Optional[Boolean]`
@@ -89,11 +91,15 @@ Data type: `Optional[Boolean]`
 if the server should be sent to background or not
 deprecated since prosody version 0.12
 
+Default value: `true`
+
 ##### <a name="-prosody--admins"></a>`admins`
 
 Data type: `Array[String]`
 
 
+
+Default value: `[]`
 
 ##### <a name="-prosody--allow_registration"></a>`allow_registration`
 
@@ -101,11 +107,15 @@ Data type: `Boolean`
 
 
 
+Default value: `false`
+
 ##### <a name="-prosody--authentication"></a>`authentication`
 
 Data type: `Enum['internal_plain', 'internal_hashed', 'cyrus', 'anonymous', 'ha1', 'ldap']`
 
 
+
+Default value: `'internal_plain'`
 
 ##### <a name="-prosody--c2s_require_encryption"></a>`c2s_require_encryption`
 
@@ -113,11 +123,15 @@ Data type: `Boolean`
 
 
 
+Default value: `true`
+
 ##### <a name="-prosody--community_modules"></a>`community_modules`
 
 Data type: `Array[String]`
 
 
+
+Default value: `[]`
 
 ##### <a name="-prosody--components"></a>`components`
 
@@ -125,11 +139,15 @@ Data type: `Hash`
 
 
 
+Default value: `{}`
+
 ##### <a name="-prosody--custom_options"></a>`custom_options`
 
 Data type: `Hash`
 
 
+
+Default value: `{}`
 
 ##### <a name="-prosody--error_log"></a>`error_log`
 
@@ -137,11 +155,15 @@ Data type: `Stdlib::Absolutepath`
 
 
 
+Default value: `'/var/log/prosody/prosody.err'`
+
 ##### <a name="-prosody--group"></a>`group`
 
 Data type: `String`
 
 
+
+Default value: `'prosody'`
 
 ##### <a name="-prosody--info_log"></a>`info_log`
 
@@ -149,11 +171,15 @@ Data type: `Stdlib::Absolutepath`
 
 
 
+Default value: `'/var/log/prosody/prosody.log'`
+
 ##### <a name="-prosody--interfaces"></a>`interfaces`
 
 Data type: `Array[Stdlib::IP::Address]`
 
 
+
+Default value: `['0.0.0.0', '::']`
 
 ##### <a name="-prosody--log_level"></a>`log_level`
 
@@ -161,11 +187,15 @@ Data type: `Prosody::Loglevel`
 
 
 
+Default value: `'info'`
+
 ##### <a name="-prosody--log_sinks"></a>`log_sinks`
 
 Data type: `Array[String]`
 
 
+
+Default value: `['syslog']`
 
 ##### <a name="-prosody--log_advanced"></a>`log_advanced`
 
@@ -173,11 +203,15 @@ Data type: `Hash[Optional[Prosody::Loglevel], Data]`
 
 
 
+Default value: `{}`
+
 ##### <a name="-prosody--modules"></a>`modules`
 
 Data type: `Array[String]`
 
 
+
+Default value: `[]`
 
 ##### <a name="-prosody--modules_base"></a>`modules_base`
 
@@ -185,11 +219,15 @@ Data type: `Array[String]`
 
 
 
+Default value: `['admin_adhoc', 'dialback', 'disco', 'pep', 'ping', 'posix', 'private', 'roster', 'saslauth', 'time', 'tls', 'uptime', 'vcard', 'version']`
+
 ##### <a name="-prosody--modules_disabled"></a>`modules_disabled`
 
 Data type: `Array[String]`
 
 
+
+Default value: `[]`
 
 ##### <a name="-prosody--package_ensure"></a>`package_ensure`
 
@@ -197,11 +235,15 @@ Data type: `String[1]`
 
 
 
+Default value: `'present'`
+
 ##### <a name="-prosody--package_name"></a>`package_name`
 
 Data type: `String`
 
 
+
+Default value: `'prosody'`
 
 ##### <a name="-prosody--manage_repository"></a>`manage_repository`
 
@@ -209,11 +251,15 @@ Data type: `Boolean`
 
 
 
+Default value: `false`
+
 ##### <a name="-prosody--repo_key"></a>`repo_key`
 
 Data type: `String`
 
 
+
+Default value: `'puppet:///modules/prosody/prosody.gpg'`
 
 ##### <a name="-prosody--pidfile"></a>`pidfile`
 
@@ -221,11 +267,15 @@ Data type: `Stdlib::Absolutepath`
 
 
 
+Default value: `'/var/run/prosody/prosody.pid'`
+
 ##### <a name="-prosody--s2s_insecure_domains"></a>`s2s_insecure_domains`
 
 Data type: `Array[Stdlib::Fqdn]`
 
 
+
+Default value: `[]`
 
 ##### <a name="-prosody--s2s_require_encryption"></a>`s2s_require_encryption`
 
@@ -233,11 +283,15 @@ Data type: `Boolean`
 
 
 
+Default value: `true`
+
 ##### <a name="-prosody--s2s_secure_auth"></a>`s2s_secure_auth`
 
 Data type: `Boolean`
 
 
+
+Default value: `true`
 
 ##### <a name="-prosody--s2s_secure_domains"></a>`s2s_secure_domains`
 
@@ -245,11 +299,15 @@ Data type: `Array[Stdlib::Fqdn]`
 
 
 
+Default value: `[]`
+
 ##### <a name="-prosody--ssl_ciphers"></a>`ssl_ciphers`
 
 Data type: `String`
 
 
+
+Default value: `'DH+AES:ECDH+AES:+ECDH+SHA:AES:!PSK:!SRP:!DSS:!ADH:!AECDH'`
 
 ##### <a name="-prosody--ssl_curve"></a>`ssl_curve`
 
@@ -257,11 +315,15 @@ Data type: `String`
 
 
 
+Default value: `'secp521r1'`
+
 ##### <a name="-prosody--ssl_custom_config"></a>`ssl_custom_config`
 
 Data type: `Boolean`
 
 
+
+Default value: `true`
 
 ##### <a name="-prosody--ssl_dhparam"></a>`ssl_dhparam`
 
@@ -269,11 +331,15 @@ Data type: `String`
 
 
 
+Default value: `undef`
+
 ##### <a name="-prosody--ssl_options"></a>`ssl_options`
 
 Data type: `Array[String]`
 
 
+
+Default value: `['cipher_server_preference', 'no_compression', 'no_sslv2', 'no_sslv3', 'no_ticket', 'single_dh_use', 'single_ecdh_use']`
 
 ##### <a name="-prosody--storage"></a>`storage`
 
@@ -281,11 +347,15 @@ Data type: `Variant[Hash, Enum['internal', 'sql', 'memory', 'null', 'none']]`
 
 
 
+Default value: `'internal'`
+
 ##### <a name="-prosody--user"></a>`user`
 
 Data type: `String`
 
 
+
+Default value: `'prosody'`
 
 ##### <a name="-prosody--virtualhost_defaults"></a>`virtualhost_defaults`
 
@@ -293,11 +363,15 @@ Data type: `Hash`
 
 
 
+Default value: `{}`
+
 ##### <a name="-prosody--virtualhosts"></a>`virtualhosts`
 
 Data type: `Hash`
 
 
+
+Default value: `{}`
 
 ##### <a name="-prosody--disco_items"></a>`disco_items`
 
@@ -367,11 +441,15 @@ Data type: `Enum[present, latest]`
 
 
 
+Default value: `'present'`
+
 ##### <a name="-prosody--community_modules--path"></a>`path`
 
 Data type: `Stdlib::Absolutepath`
 
 
+
+Default value: `'/var/lib/prosody/modules'`
 
 ##### <a name="-prosody--community_modules--source"></a>`source`
 
@@ -379,11 +457,15 @@ Data type: `String`
 
 
 
+Default value: `'https://hg.prosody.im/prosody-modules/'`
+
 ##### <a name="-prosody--community_modules--type"></a>`type`
 
 Data type: `Enum['hg', 'git']`
 
 
+
+Default value: `'hg'`
 
 ##### <a name="-prosody--community_modules--revision"></a>`revision`
 
