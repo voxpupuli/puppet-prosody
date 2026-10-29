@@ -639,4 +639,3 @@ Default value: `[]`
 The Prosody::Loglevel data type.
 
 Alias of `Enum['debug', 'info', 'warn', 'error']`
-
